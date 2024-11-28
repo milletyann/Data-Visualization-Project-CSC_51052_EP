@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Soccer Game Visualization</title>
+
+    <!-- Load D3 and D3-soccer -->
+    <script src="js/d3.v7.min.js"></script>
+    <script src="js/custom-d3-soccer.min.js"></script>
+    <script>
+        const custom_d3_soccer = d3; // Alias for our modified d3-soccer library
+    </script>
+    <script src="js/soccer-viz.js"></script>
+
+    <!-- Styles -->
+    <link href="styles.css" rel="stylesheet">
+
+</head>
+<body onload="main()">
+<div class="container">
+    <h1>Soccer Game Visualization</h1>
+
+    <!-- Error message container -->
+    <div class="error" id="error"></div>
+
+    <!-- Loading indicator -->
+    <div class="loading" id="loading">Loading visualization...</div>
+
+    <!-- Main visualization container -->
+    <div id="visualization"></div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button id="playPause">Pause</button>
+        <button id="reset">Reset</button>
+    </div>
+</div>
+</body>
+</html>
