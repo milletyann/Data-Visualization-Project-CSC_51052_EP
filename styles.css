@@ -1,0 +1,97 @@
+/* Base styles */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography */
+h1 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Visualization container */
+#visualization {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Soccer pitch elements */
+#lines line,
+#lines circle,
+#lines path,
+#lines rect {
+    stroke: #FFFFFF
+}
+
+/* Player and Voronoi animations */
+circle {
+    transition: all 0.1s ease;
+}
+
+path {
+    transition: all 0.1s ease;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #666;
+}
+
+/* Error state */
+.error {
+    color: #d32f2f;
+    padding: 20px;
+    text-align: center;
+    background-color: #ffebee;
+    border-radius: 4px;
+    margin: 20px 0;
+    display: none;
+}
+
+/* Controls section */
+.controls {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+/* Buttons */
+button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2196f3;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1976d2;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
