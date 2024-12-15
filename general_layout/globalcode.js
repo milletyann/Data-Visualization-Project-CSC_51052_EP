@@ -6,6 +6,7 @@ const ctx = {
 };
 
 function initPage() {
+    // add here the creation of SVG elements
     loadCompetitions();
 };
 
@@ -86,7 +87,7 @@ function updateSeasonChosen() {
     });
 
     let teamSelect = document.getElementById("team");
-    ctx.path = `../../open-data/data/matches/` + ctx.currentCompID + `/` + ctx.currentSeasonID + `.json`; // current json of matches (for 1 comp 1 year)
+    ctx.path = `../data/matches/` + ctx.currentCompID + `/` + ctx.currentSeasonID + `.json`; // current json of matches (for 1 comp 1 year)
     d3.json(ctx.path).then(function(data) {
         ctx.teams = [];
         data.forEach(element => {
@@ -154,7 +155,7 @@ function updateGameChosen() {
     console.log("You selected the game: " + i);
 
     ctx.currentGameID = i;
-    d3.json("../../open-data/data/events/" + i + ".json").then(function(data) {
+    d3.json("../data/events/" + i + ".json").then(function(data) {
         ctx.gameData = data;
         // simple load so everyone can access this in its own js file and treat it like he wants
         createViz();

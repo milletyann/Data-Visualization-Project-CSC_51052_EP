@@ -13,4 +13,4 @@ ToDo:
   - Organize all ideas into a custom dashboard for this part
 - Interactions between the 3 parts (click in a part triggers a viz in another part)
 - Reorganize the files (modify the paths in the code accordingly) into a better organization
--
+- 
