@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Game Analysis - Dashboard</title>
+    <!-- d3js import -->
+    <script type="text/javascript" src="../js/d3.v7.min.js"></script>
+    <!-- Section 2 js code (player stats) -->
+    <script type="text/javascript" src="globalcode.js"></script>
+    <script type="text/javascript" src="part2.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="initPage()">
+    <section id="landing">
+        <div class="title"></div>
+        <div class="menu">
+            <form name="gameChoice">
+                <select id="competition" name="competition" onchange="updateCompetitionChosen()">
+                    <option>Select a competition</option>
+                </select>
+                <select id="season" name="season" onchange="updateSeasonChosen()">
+                    <option>Select a season</option>
+                </select>
+                <select id="team" name="team" onchange="updateTeamChosen()">
+                    <option>Select a team</option>
+                </select>
+                <select id="game" name="game" onchange="updateGameChosen()">
+                    <option>Select a game</option>
+                </select>
+            </form>
+        </div>
+    </section>
+    <section id="gameViz" class="section"></section>
+    <section id="playersViz" class="section"></section>
+    <section id="teamsViz" class="section"></section>
+</body>
+<footer>
+    <div>
+        <p>Data Visualization Project - 2024/2025</p>
+        <p>Created by Yann Millet (Data AI), Gloire Linvani (Data AI), Yong Mok (X)</p>
+        <p>Teachers: Emmanuel Pietriga (X, Inria), Olivier Gladin (X, Inria)</p>
+    </div>
+</footer>
+</html>

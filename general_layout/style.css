@@ -1,0 +1,68 @@
+svg {
+    display: block;
+    font-family: sans-serif;
+    font-size: 10;
+}
+
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    position: absolute;
+    width: 100%;
+    background: rgb(86, 82, 82);
+}
+
+#landing {
+    border: 1px solid green;
+    width: 100% -2px; /* -2px to delete when borders disappear */
+    height: 100px;
+}
+
+#landing .menu form {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#landing .menu form select {
+    margin: 40px;
+}
+
+/* All sections */
+.section {
+    position: relative;
+    width: 100% - 2px; /* -2px to delete when borders disappear */
+    min-height: 150px; /* to delete when section are filled */
+}
+
+
+/* Section 1 */
+#gameViz {
+    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+/* Section 2 */
+#playersViz {
+    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+/* Section 3 */
+#teamsViz {
+    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+footer {
+    width: 100% -2px;
+    margin: 25px;
+    padding: 25px;
+
+    text-align: center;
+    border: 1px solid grey;
+}
