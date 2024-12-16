@@ -1,0 +1,185 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centers the match card on the page */
+    flex-direction: column; /* Stacks children vertically */
+}
+
+.match-card {
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+}
+
+.team-logo {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+}
+
+.team-score {
+    text-align: center;
+}
+
+.match-info {
+    text-align: center;
+}
+
+.match-goals {
+    display: flex;
+    justify-content: space-between;
+}
+
+.match-goals div {
+    margin: 10px;
+}
+
+h2, p {
+    margin: 5px;
+    padding: 0;
+}
+
+
+.navbar {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center; /* Centering buttons within the navbar */
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px 20px; /* Padding for aesthetic spacing */
+    
+}
+
+.navbar button {
+    flex-grow: 1; /* Allows each button to grow and fill the navbar */
+    margin: 0 2px; /* Provides a little space between buttons */
+    padding: 8px;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-bottom: 3px solid transparent; /* For the underline effect */
+    transition: background-color 0.3s, border-bottom-color 0.3s;
+}
+
+.navbar button:hover {
+    background-color: #c0bed8;
+    box-shadow: 0 2px 5px rgba(118, 83, 83, 0.15); /* Slight elevation on hover */
+}
+
+.content-section {
+    display: none; /* Initially hidden */
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 5px; /* Optional: adds rounded corners */
+}
+
+.navbar button.active {
+    border-bottom-color: #007BFF; /* Blue underline for the active button */
+}
+
+#match-stats {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-row-logos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    justify-content: space-around;
+}
+
+
+
+.team-logo-small {
+    height: 30px;
+}
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.stat-value-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.stat-name {
+    flex-grow: 1;
+    text-align: center;
+}
+.stat-value {
+    width: 100px;
+    text-align: center;
+}
+.stat-value.home {
+    text-align: right;
+    padding-right: 10px; /* Adjust padding as needed */
+}
+.stat-value.away {
+    text-align: left;
+    padding-left: 10px; /* Adjust padding as needed */
+}
+
+.bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    position: relative;
+    height: 2px; /* Set a fixed height for visibility */
+    background-color: #dad5d5; /* Optional: background to enhance visibility */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.stat-bar {
+    height: 10px;
+    position: absolute;
+    
+}
+
+.stat-bar.home {
+    right: 50%; /* Starts from the center */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #b30000; /* Red color for home team */
+    transform: translateX(-0.5%);
+}
+
+.stat-bar.away {
+    left: 50%; /* Starts from the center */
+    background-color: #0000b3; /* Blue color for away team */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: translateX(0.5%);
+}
