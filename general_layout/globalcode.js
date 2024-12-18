@@ -6,8 +6,15 @@ const ctx = {
 };
 
 function initPage() {
+    console.log("d3 version " + d3.version);
     // add here the creation of SVG elements
-    loadCompetitions();
+    // initial SVG elements creations for PART 1
+    // initial SVG elements creations for PART 2
+    d3.select("#playersViz").append("svg");
+    // initial SVG elements creations for PART 3
+
+    //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    updateGameChosen();
 };
 
 // just examples for now, these functions are loaded in the separated js files
@@ -165,7 +172,7 @@ function updateGameChosen() {
 
 // takes data from a json and returns the list of elements that match some pattern
 function matchDataToOptions(data, i, ) {
-
+    // maybe later to make the code clearer and more compact
 }
 
 function resetSeasonOption() {
