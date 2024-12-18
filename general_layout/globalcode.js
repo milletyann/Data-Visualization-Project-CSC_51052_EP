@@ -10,22 +10,24 @@ function initPage() {
     // add here the creation of SVG elements
     // initial SVG elements creations for PART 1
     // initial SVG elements creations for PART 2
-    d3.select("#playersViz").append("svg");
+    let part2svgEl = d3.select("#svg-container-part2").append("svg");
+    part2svgEl.attr("width", c2.WIDTH);
+    part2svgEl.attr("height", c2.HEIGHT);
+    initializeButtons();
+    
     // initial SVG elements creations for PART 3
-
     //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
     updateGameChosen();
 };
 
-// just examples for now, these functions are loaded in the separated js files
 function createViz() {
     // part 1 (Gloire)
     //vizPart1();
-    // part 2 (Yann) (test is in part2.js)
-    part2();
+    // part 2 (Yann)
+    vizPart2();
     // part 3 (Yong)
     //vizPart3()
-}
+};
 
 /* ---- Adapt menu and data loading files ---- */
 
@@ -69,7 +71,7 @@ function updateCompetitionChosen() {
             opt.value = element.season_name;
             opt.innerHTML = element.season_name;
             seasonSelect.appendChild(opt);
-        }
+        };
     });
 };
 
@@ -114,7 +116,7 @@ function updateSeasonChosen() {
         });
     }).catch(function(error){console.log(error)});
 
-}
+};
 
 // when called when the thrid select of the form is modified (ingores if First and Second select are not valid)
 function updateTeamChosen() {
@@ -139,7 +141,7 @@ function updateTeamChosen() {
                     place: (homeBool ? "Home" : "Away"),
                 }
             );
-        }
+        };
     });
     // DOUBLONS ICI: LES MATCHES SONT EN DOUBLES DANS LE SELECT DE GAME
     ctx.games.forEach(element => {
@@ -147,8 +149,8 @@ function updateTeamChosen() {
         opt.value = element.gameID;
         opt.innerHTML = element.competition_stage + " - vs " + element.against + " (" + element.place + ")";
         gameSelect.appendChild(opt);
-    })
-}
+    });
+};
 
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
@@ -156,16 +158,16 @@ function updateGameChosen() {
     let i = 3943077; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
-    }
+    };
 
     ctx.currentGameID = i;
     d3.json("../data/events/" + i + ".json").then(function(data) {
-        console.log("Game file " + i + " is loaded");
+        console.log("Game file " + i + ".json is loaded");
         ctx.gameData = data;
         // simple load so everyone can access this in its own js file and treat it like he wants
         createViz();
-    })
-}
+    });
+};
 
 
 /* ------ Utilities ------- */
@@ -173,7 +175,7 @@ function updateGameChosen() {
 // takes data from a json and returns the list of elements that match some pattern
 function matchDataToOptions(data, i, ) {
     // maybe later to make the code clearer and more compact
-}
+};
 
 function resetSeasonOption() {
     let seasonSelect = document.getElementById("season");
@@ -185,7 +187,7 @@ function resetSeasonOption() {
     let optS = document.createElement('option');
     optS.innerHTML = "Select a season";
     seasonSelect.appendChild(optS);
-}
+};
 
 function resetTeamOption() {
     let teamSelect = document.getElementById("team");
@@ -197,7 +199,7 @@ function resetTeamOption() {
     let optT = document.createElement('option');
     optT.innerHTML = "Select a team";
     teamSelect.appendChild(optT);
-}
+};
 
 function resetGameOption() {
     let gameSelect = document.getElementById("game");
@@ -209,4 +211,4 @@ function resetGameOption() {
     let optG = document.createElement('option');
     optG.innerHTML = "Select a game";
     gameSelect.appendChild(optG);
-}
+};
