@@ -15,7 +15,7 @@ function createViz() {
     // part 1 (Gloire)
     //vizPart1();
     // part 2 (Yann) (test is in part2.js)
-    test(ctx.currentGameID);
+    part2();
     // part 3 (Yong)
     //vizPart3()
 }
@@ -47,8 +47,7 @@ function updateCompetitionChosen() {
     let i = gameChoice.competition.value;
     if (i === "Select a competition") {
         return;
-    }
-    console.log("You selected the competition: " + i);
+    };
 
     // Reset the field of the downstream options
     resetSeasonOption();
@@ -72,8 +71,7 @@ function updateSeasonChosen() {
     let i = gameChoice.season.value;
     if (i === "Select a season") {
         return;
-    }
-    console.log("You selected the season: " + i);
+    };
 
     // Reset the field of the downstream options
     resetTeamOption();
@@ -116,8 +114,7 @@ function updateTeamChosen() {
     let i = gameChoice.team.value;
     if (i === "Select a team") {
         return;
-    }
-    console.log("You selected the team: " + i);
+    };
 
     // Reset the field of the downstream options
     resetGameOption();
@@ -148,14 +145,15 @@ function updateTeamChosen() {
 
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
-    let i = gameChoice.game.value;
+    //let i = gameChoice.game.value;
+    let i = 3943077; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
     }
-    console.log("You selected the game: " + i);
 
     ctx.currentGameID = i;
     d3.json("../data/events/" + i + ".json").then(function(data) {
+        console.log("Game file " + i + " is loaded");
         ctx.gameData = data;
         // simple load so everyone can access this in its own js file and treat it like he wants
         createViz();
