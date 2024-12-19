@@ -55,6 +55,7 @@ function vizPart2() {
     // List all players that played
     c2.homePlayers = extractPlayers(ctx.currentGameID, ctx.gameData[0].team.name, true);
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
+    console.log(c2.homePlayers);
 
     populateMetricsList();
     iterateEvents();
@@ -66,7 +67,7 @@ function populateMetricsList() {
     const leftList = document.getElementById("list-left");
 
     while (leftList.firstChild) {
-      leftList.removeChild(leftList.firstChild);
+        leftList.removeChild(leftList.firstChild);
     };
 
     const h3 = document.createElement("h3");
@@ -76,10 +77,10 @@ function populateMetricsList() {
     leftList.appendChild(ul);
 
     c2.metrics.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item.text;
-      li.addEventListener("click", () => handleListItemClick(item.name));
-      ul.appendChild(li);
+        const li = document.createElement("li");
+        li.textContent = item.text;
+        li.addEventListener("click", () => handleListItemClick(item.name));
+        ul.appendChild(li);
     });
 }
 
@@ -126,8 +127,8 @@ function displayBarChart(topN, path) {
     barGroups.append('rect')
         .attr("width", c2.xScale.bandwidth() - 20)
         .attr("height", d => c2.chartHeight - c2.yScale(getPropertyValue(d, path)))
-        .attr("fill", "blue");
-
+        .attr("fill", "blue")
+        .append("title").text(d => `Name : ${d.name} \nTeam : ${d.team.name} \nJersey n° : ${d.jersey_number} \nPlays ${d.position}`);
 }
 
 
@@ -145,6 +146,7 @@ function handleListItemClick(item_name) {
     });
 
     topN = combine.slice(0,c2.n);
+
     displayBarChart(topN, path);
 }
 
@@ -161,6 +163,8 @@ function extractPlayers(game_id, teamName, home) {
                     j.enters_at = [element.minute, element.second];
                     j.subbed = null;
                     j.titu = true;
+                    j.jersey_number = el.jersey_number;
+                    j.position = el.position.name;
                     players.push(j);
                 });
 
@@ -170,6 +174,8 @@ function extractPlayers(game_id, teamName, home) {
                 j.enters_at = [element.minute, element.second];
                 j.subbed = null;
                 j.titu = false;
+                j.jersey_number = element.jersey_number;
+                j.position = element.position.name;
                 players.push(j);
 
                 // subbed player info update

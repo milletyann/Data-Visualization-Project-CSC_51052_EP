@@ -17,11 +17,6 @@ svg {
     scrollbar-width: none;
 }
 
-.smoothFading {
-    visibility: hidden;
-    transition: visibility 0.4s ease;
-}
-
 body {
     position: absolute;
     width: 100%;
@@ -64,12 +59,12 @@ body {
 
 /* ------- Section 1 ------- */
 #gameViz {
-    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
 }
 
 /* ------- Section 2 ------- */
 #playersViz {
-    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
 }
 
 
@@ -101,8 +96,6 @@ body {
     max-height: 400px;
     flex: 1;
 }
-
-
 
 #list-left h3 {
     border: 1px solid rgb(218, 214, 214);
@@ -146,6 +139,46 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* tooltip test */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* ------- Section 3 ------- */
