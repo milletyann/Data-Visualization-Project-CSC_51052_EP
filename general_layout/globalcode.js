@@ -17,7 +17,7 @@ function initPage() {
     initializeButtons();
     
     // initial SVG elements creations for PART 3
-    //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
     updateGameChosen();
 };
 
@@ -27,8 +27,9 @@ function createViz() {
     // part 2 (Yann)
     vizPart2();
     // part 3 (Yong)
-    //vizPart3()
+    vizPart3();
 }
+
 
 /* ---- Adapt menu and data loading files ---- */
 
@@ -48,7 +49,7 @@ function loadCompetitions() {
                 }
             });
             ctx.competitionsData = data;
-            //console.log("Competitions data: ", data);
+            console.log("Competitions data: ", data);
         }
     ).catch(function(error){console.log(error)});
 };
@@ -158,10 +159,18 @@ function updateTeamChosen() {
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
     let i = gameChoice.game.value;
+    //let i = 3943077; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
-    }
-    console.log("You selected the game: " + i);
+    };
+
+    const selectedGame = ctx.matchesData.find(element => element.match_id == i);
+    ctx.homeTeamId = selectedGame.home_team.home_team_id;
+    ctx.homeTeamId_name = selectedGame.home_team.home_team_name;
+    ctx.awayTeamId = selectedGame.away_team.away_team_id;
+    ctx.awayTeamId_name = selectedGame.away_team.away_team_name;
+    console.log("Home Team ID:", ctx.homeTeamId, "Away Team ID:", ctx.awayTeamId);
+    console.log("Home Team Name:", ctx.homeTeamId_name, "Away Team Name:", ctx.awayTeamId_name);
 
     ctx.currentGameID = i;
     console.log("event file: ", "../data/events/" + i + ".json");
@@ -215,4 +224,6 @@ function resetGameOption() {
     let optG = document.createElement('option');
     optG.innerHTML = "Select a game";
     gameSelect.appendChild(optG);
-}
+
+};
+

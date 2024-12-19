@@ -39,7 +39,6 @@
     </section>
     <!-- Gloire's part -->
     <section id="gameViz" class="section"></section>
-
     <!-- Yann's part -->
     <section id="playersViz" class="section">
         <div id="controls-part2">
@@ -53,18 +52,31 @@
             <div id="svg-container-part2"></div>
             <div id="list-right">
                 <h3>Player Away Team</h3>
+
             </div>
         </div>
     </section>
-
     <!-- Yong's part -->
-    <section id="teamsViz" class="section"></section>
+    <section id="teamsViz" class="section" >
+        <nav class="navbar">
+            <button id="match-stats-btn" >Match Stats</button>
+            <button id="lineups-btn" onclick="displayLineups()">Lineups</button>
+        </nav>
+    
+        <div id="content">
+            <div id="match-stats" class="content-section" style="display: none;">
+                <!-- Match stats content goes here -->
+            </div>
+            <div id="lineups" class="content-section" style="display: none;">
+                <!-- Lineups content goes here -->
+            </div>
+        </div>     
+    <footer>
+        <div>
+            <p>Data Visualization Project - 2024/2025</p>
+            <p>Created by Yann Millet (Data AI), Gloire Linvani (Data AI), Yong Mok (X)</p>
+            <p>Teachers: Emmanuel Pietriga (X, Inria), Olivier Gladin (X, Inria)</p>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div>
-        <p>Data Visualization Project - 2024/2025</p>
-        <p>Created by Yann Millet (Data AI), Gloire Linvani (Data AI), Yong Mok (X)</p>
-        <p>Teachers: Emmanuel Pietriga (X, Inria), Olivier Gladin (X, Inria)</p>
-    </div>
-</footer>
 </html>

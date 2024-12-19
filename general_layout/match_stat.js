@@ -150,11 +150,6 @@ function handleMatchStatsClick() {
     }
 }
 
-// Add event listener for the button click
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('match-stats-btn').addEventListener('click', handleMatchStatsClick);
-});
-
 // Function to extract players from events
 function extractPlayers(events, homeTeamId, awayTeamId) {
     const players = {
