@@ -184,15 +184,15 @@ function extractPlayers(game_id, teamName, home) {
                 dribbles_missed: 0,
                 offsides: 0,
                 xG: 0,
-                xG_diff: 0, // apres
-                xG_per_shot: 0, // apres
+                xG_diff: 0,
+                xG_per_shot: 0,
             },
             passing: {
                 assists: 0,
                 key_passes: 0,
                 passes_successful: 0,
                 passes_missed: 0,
-                avg_pass_length: 0, // apres
+                avg_pass_length: 0,
                 ball_loss: 0,
             },
             goalkeeper: {
@@ -323,7 +323,9 @@ function iterateEvents() {
         };
     });
     c2.homePlayers.forEach(j => {
-        console.log(j);
+        j.stats.attack.xG_diff = j.stats.general.goals_scored - j.stats.attack.xG; // xG_diff
+        j.stats.general.shots.total != 0 ? j.stats.attack.xG_per_shot = j.stats.attack.xG / j.stats.general.shots.total : 0; // xG_per_shot
+        j.stats.passing.avg_pass_length /= (j.stats.passing.passes_missed + j.stats.passing.passes_successful); // avg_pass_length
     });
     // a la fin de cette fonction on a des données utilisables
 };
