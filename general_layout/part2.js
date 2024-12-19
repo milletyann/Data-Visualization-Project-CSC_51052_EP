@@ -46,6 +46,8 @@ c2 = {
         {name: "goalkeeper-digs_successful", text: "Successful Digs"},
         {name: "goalkeeper-punch", text: "Punches"},
     ],
+    // Number of players displayed in the chart
+    n: 5,
 };
 
 function vizPart2() {
@@ -95,7 +97,24 @@ function setDefaultStats() {
 
 function handleListItemClick(item_name) {
     let path = item_name.split('-');
-    console.log(path);
+
+    let combine = [...c2.homePlayers, ...c2.awayPlayers];
+
+    combine.sort((a, b) => {
+        const valueA = getPropertyValue(a, path) || 0;
+        const valueB = getPropertyValue(b, path) || 0;
+        return valueB - valueA;
+    });
+    
+    topN = combine.slice(0,c2.n);
+}
+
+function getPropertyValue(obj, pathArray) {
+    let val = obj['stats'];
+    for (let i=0; i<pathArray.length;i++) {
+        val = val[pathArray[i]];
+    };
+    return val;
 }
 
 
@@ -333,5 +352,6 @@ function findPlayer(id_player) {
 function fromYardsToMeters(value) {
     return 0.9144*value;
 }
+
 // fonction pour trier les tops players en fonction d'une certaine stats
 // fonctions annexes pour calculer des trucs (temps de jeu, distance courue...)

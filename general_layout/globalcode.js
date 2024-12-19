@@ -18,9 +18,9 @@ function initPage() {
     // initial SVG elements creations for PART 3
 
 
-    loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
     populateMetricsList();
-    //updateGameChosen();
+    updateGameChosen();
 };
 
 function createViz() {
@@ -156,7 +156,7 @@ function updateTeamChosen() {
     });
 };
 
-// called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
+// called when the fourth select of the form is modified
 function updateGameChosen() {
     //let i = gameChoice.game.value;
     let i = 7567; // TO DELETE !! JUST IN DEVELOPMENT
