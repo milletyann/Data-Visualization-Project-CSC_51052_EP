@@ -7,18 +7,27 @@ const ctx = {
 
 
 function initPage() {
+    console.log("d3 version " + d3.version);
     // add here the creation of SVG elements
-    loadCompetitions();
+    // initial SVG elements creations for PART 1
+    // initial SVG elements creations for PART 2
+    let part2svgEl = d3.select("#svg-container-part2").append("svg");
+    part2svgEl.attr("width", c2.WIDTH);
+    part2svgEl.attr("height", c2.HEIGHT);
+    initializeButtons();
+    
+    // initial SVG elements creations for PART 3
+    //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    updateGameChosen();
 };
 
-// just examples for now, these functions are loaded in the separated js files
 function createViz() {
     // part 1 (Gloire)
     //vizPart1();
-    // part 2 (Yann) (test is in part2.js)
-    test(ctx.currentGameID);
+    // part 2 (Yann)
+    vizPart2();
     // part 3 (Yong)
-    vizPart3();
+    //vizPart3()
 }
 
 /* ---- Adapt menu and data loading files ---- */
@@ -49,8 +58,7 @@ function updateCompetitionChosen() {
     let i = gameChoice.competition.value;
     if (i === "Select a competition") {
         return;
-    }
-    console.log("You selected the competition: " + i);
+    };
 
     // Reset the field of the downstream options
     resetSeasonOption();
@@ -65,7 +73,7 @@ function updateCompetitionChosen() {
             opt.value = element.season_name;
             opt.innerHTML = element.season_name;
             seasonSelect.appendChild(opt);
-        }
+        };
     });
 };
 
@@ -74,8 +82,7 @@ function updateSeasonChosen() {
     let i = gameChoice.season.value;
     if (i === "Select a season") {
         return;
-    }
-    console.log("You selected the season: " + i);
+    };
 
     // Reset the field of the downstream options
     resetTeamOption();
@@ -112,15 +119,14 @@ function updateSeasonChosen() {
         });
     }).catch(function(error){console.log(error)});
 
-}
+};
 
 // when called when the thrid select of the form is modified (ingores if First and Second select are not valid)
 function updateTeamChosen() {
     let i = gameChoice.team.value;
     if (i === "Select a team") {
         return;
-    }
-    console.log("You selected the team: " + i);
+    };
 
     // Reset the field of the downstream options
     resetGameOption();
@@ -138,7 +144,7 @@ function updateTeamChosen() {
                     place: (homeBool ? "Home" : "Away"),
                 }
             );
-        }
+        };
     });
     // DOUBLONS ICI: LES MATCHES SONT EN DOUBLES DANS LE SELECT DE GAME
     ctx.games.forEach(element => {
@@ -146,42 +152,34 @@ function updateTeamChosen() {
         opt.value = element.gameID;
         opt.innerHTML = element.competition_stage + " - vs " + element.against + " (" + element.place + ")";
         gameSelect.appendChild(opt);
-    })
-}
+    });
+};
 
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
-    console.log("Context: ", ctx);
     let i = gameChoice.game.value;
     if (i === "Select a game") {
         return;
     }
     console.log("You selected the game: " + i);
 
-    const selectedGame = ctx.matchesData.find(element => element.match_id == i);
-    ctx.homeTeamId = selectedGame.home_team.home_team_id;
-    ctx.homeTeamId_name = selectedGame.home_team.home_team_name;
-    ctx.awayTeamId = selectedGame.away_team.away_team_id;
-    ctx.awayTeamId_name = selectedGame.away_team.away_team_name;
-    console.log("Home Team ID:", ctx.homeTeamId, "Away Team ID:", ctx.awayTeamId);
-    console.log("Home Team Name:", ctx.homeTeamId_name, "Away Team Name:", ctx.awayTeamId_name);
-
     ctx.currentGameID = i;
     console.log("event file: ", "../data/events/" + i + ".json");
     d3.json("../data/events/" + i + ".json").then(function(data) {
+        console.log("Game file " + i + ".json is loaded");
         ctx.gameData = data;
         // simple load so everyone can access this in its own js file and treat it like he wants
         createViz();
-    })
-}
+    });
+};
 
 
 /* ------ Utilities ------- */
 
 // takes data from a json and returns the list of elements that match some pattern
 function matchDataToOptions(data, i, ) {
-
-}
+    // maybe later to make the code clearer and more compact
+};
 
 function resetSeasonOption() {
     let seasonSelect = document.getElementById("season");
@@ -193,7 +191,7 @@ function resetSeasonOption() {
     let optS = document.createElement('option');
     optS.innerHTML = "Select a season";
     seasonSelect.appendChild(optS);
-}
+};
 
 function resetTeamOption() {
     let teamSelect = document.getElementById("team");
@@ -205,7 +203,7 @@ function resetTeamOption() {
     let optT = document.createElement('option');
     optT.innerHTML = "Select a team";
     teamSelect.appendChild(optT);
-}
+};
 
 function resetGameOption() {
     let gameSelect = document.getElementById("game");
@@ -218,5 +216,3 @@ function resetGameOption() {
     optG.innerHTML = "Select a game";
     gameSelect.appendChild(optG);
 }
-
-
