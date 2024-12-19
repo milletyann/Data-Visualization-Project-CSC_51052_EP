@@ -1,7 +1,7 @@
 c2 = {
     // part2 svg size
     svgHEIGHT: 400,
-    svgWIDTH: 800,
+    svgWIDTH: 680,
     margin: { top: 20, right: 20, bottom: 30, left: 50 },
     // players lists
     homePlayers: [],
@@ -48,7 +48,7 @@ c2 = {
         {name: "goalkeeper-punch", text: "Punches"},
     ],
     // Number of players displayed in the chart
-    n: 5,
+    n: 10,
 };
 
 function vizPart2() {
@@ -87,35 +87,47 @@ function populateMetricsList() {
 
 function displayBarChart(topN, path) {
     const maxVal = d3.max(topN, o => getPropertyValue(o, path));
-    const chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
-    const chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
+    c2.chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
+    c2.chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
 
-    const xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, chartWidth]).padding(0.1);
-    const yScale = d3.scaleLinear().domain([0, maxVal]).range([chartHeight, 0]);
+    c2.xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, c2.chartWidth]).align(0);
+    c2.yScale = d3.scaleLinear().domain([0, maxVal]).range([c2.chartHeight, 0]);
 
     const svgContainer = d3.select("#svgPart2");
+
+    const lc = svgContainer.lastElementChild;
+    while (lc) {
+        svgContainer.removeChild(lc);
+        lc = svgContainer.lastElementChild
+    };
 
     const mainG = svgContainer.append("g")
         .attr("transform", `translate(${c2.margin.left},${c2.margin.top})`)
         .attr("id", "mainG");
 
     mainG.append("g")
-        .call(d3.axisLeft(yScale))
+        .call(d3.axisLeft(c2.yScale))
         .attr("class", "y-axis");
 
+    mainG.append("g")
+        .attr("transform", `translate(0,${c2.chartHeight})`)
+        .call(d3.axisBottom(c2.xScale))
+        .attr("class", "x-axis");
+
+    const xSpacing = c2.xScale.bandwidth();
     const barGroups = mainG.selectAll(".bar-group")
         .data(topN)
         .enter()
         .append("g")
         .attr("class", "bar-group")
-        .attr("transform", d => `translate(${xScale(d.name)}, 0)`);
+        .attr("transform", (d, i)=> `translate(${(i+1/3)*xSpacing}, 0)`)
+        .attr("y", d => c2.xScale(getPropertyValue(d, path)))
+        
+    barGroups.append('rect')
+        .attr("width", c2.xScale.bandwidth() - 20)
+        .attr("height", d => c2.chartHeight - c2.yScale(getPropertyValue(d, path)))
+        .attr("fill", "blue");
 
-    barGroups.append("rect")
-        .attr("x", d => xScale(d.name)) // NaN
-        .attr("y", d => yScale(getPropertyValue(d, path))) // NaN
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => chartHeight - yScale(getPropertyValue(d, path)))
-        .attr("fill", "red");
 }
 
 
