@@ -1,7 +1,7 @@
 c2 = {
     // part2 svg size
     HEIGHT: 480,
-    WIDTH: 720,
+    WIDTH: 820,
     // visualization 1 selected (true if players-comparison, false if players-ranking)
     viz: true,
     // players lists
@@ -20,11 +20,11 @@ function vizPart2() {
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
     console.log(c2.homePlayers);
     console.log(c2.awayPlayers);
-    populateSideLists();
+    //populateSideLists();
     // Pass over all the file to fill the stats object of the players
     iterateEvents();
     // Display defaults stats (first players of their team for example)
-    setDefaultStats();
+    //setDefaultStats();
 }
 
 /* ------- HTML related functions ------- */
@@ -48,19 +48,46 @@ function toggleVisualizationPart2(selectedBtn, otherBtn) {
             return;
         } else {
             c2.viz = !c2.viz;
-            // METTRE ICI LES TRANSITIONS VERS LA VIZ DES COMPARAISONS
             console.log("Toggle Versus");
+            // METTRE ICI LES TRANSITIONS VERS LA VIZ DES COMPARAISONS
+            //addLists();
         }
     } else {
         if (!c2.viz) {
             return;
         } else {
             c2.viz = !c2.viz;
-            // METTRE ICI LE CHANGEMENT VERS LA VIZ DES RANKING JOUEURS
             console.log("Toggle Global");
+            // METTRE ICI LE CHANGEMENT VERS LA VIZ DES RANKING JOUEURS
+            //removeLists();
+            // Initialiser la liste de gauche pour la visu des rankings
+            //initializeLeftListRanking();
         }
     }
 };
+
+function addLists() {
+    let leftList = document.getElementById("list-left");
+    leftList.classList.remove("smoothFading");
+    let rightList = document.getElementById("list-right");
+    rightList.classList.remove("smoothFading");
+}
+
+function removeLists() {
+    let leftList = document.getElementById("list-left");
+    leftList.classList.add("smoothFading");
+    let rightList = document.getElementById("list-right");
+    rightList.classList.add("smoothFading");
+}
+
+function initializeLeftListRanking() {
+    // clear la liste
+    const leftList = document.getElementById("list-left");
+    while (leftList.lastChild) {
+        leftList.removeChild(leftList.lastChild);
+    };
+    console.log(c2.homePlayers[0].stats);
+}
 
 function populateSideLists() {
     const leftList = document.getElementById("list-left");
@@ -153,15 +180,19 @@ function extractPlayers(game_id, teamName, home) {
         j.stats = {
             general: {
                 minutes_played: 0,
-                goals_scored: 0,
-                assists: 0,
+                goals_scored: 0, //
+                assists: 0, 
                 cards: {
                     yellow: 0,
                     red: 0,
                 },
                 MotM: false,
-                shots: 0,
-                shots_ontarget: 0,
+                shots: {
+                    total: 0, //
+                    left_foot: 0,
+                    right_foot: 0,
+                    head: 0,
+                },
                 balls_touched: 0,
                 distance_ran: 0,
             },
@@ -181,7 +212,7 @@ function extractPlayers(game_id, teamName, home) {
                 dribbles_successful: 0,
                 dribbles_missed: 0,
                 offside: 0,
-                xG: 0,
+                xG: 0, //
                 xG_diff: 0,
                 xG_per_shot: 0,
             },
@@ -202,10 +233,37 @@ function extractPlayers(game_id, teamName, home) {
 
 function iterateEvents() {
     console.log("Maintenant je passe sur les evenements du match");
+    ctx.gameData.forEach(event => {
+        // joueur concerné directement
+        let player = findPlayer(event.player.id);
+        // On passe sur les tirs
+        if (event.shot) {
+            //console.log("tir de " + event.player.name);
+            player.stats.general.shots.total++;
+            player.stats.attack.xG += event.shot.statsbomb_xg;
+            if (event.shot.outcome.name === 'Goal') {
+                player.stats.general.goals_scored++;
+                //console.log("BUT de " + event.player.name + " for " + event.team.name);
+            };
+            if (event.shot.body_part.name === "Left Foot") {
+                
+            };
+        }
+    })
     // a la fin de cette fonction on a des données utilisables
 };
 
 /* ------- Stats Computations ------- */
 
+// returns the player that is involved (searches in both home and away arrays)
+function findPlayer(id_player) {
+    let player = c2.homePlayers.find(pl => pl.id === id_player);
+    if (player) {
+        return player;
+    } else {
+        player = c2.awayPlayers.find(pl => pl.id === id_player);
+        return player;
+    }
+}
 // fonction pour trier les tops players en fonction d'une certaine stats
 // fonctions annexes pour calculer des trucs (temps de jeu, distance courue...)

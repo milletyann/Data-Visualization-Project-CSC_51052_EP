@@ -11,10 +11,10 @@ function initPage() {
     // add here the creation of SVG elements
     // initial SVG elements creations for PART 1
     // initial SVG elements creations for PART 2
-    let part2svgEl = d3.select("#svg-container-part2").append("svg");
+    let part2svgEl = d3.select("#svg-container-part2").append("svg").attr("id", "svgPart2");
     part2svgEl.attr("width", c2.WIDTH);
     part2svgEl.attr("height", c2.HEIGHT);
-    initializeButtons();
+    //initializeButtons();
     
     // initial SVG elements creations for PART 3
     //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
@@ -146,7 +146,6 @@ function updateTeamChosen() {
             );
         };
     });
-    // DOUBLONS ICI: LES MATCHES SONT EN DOUBLES DANS LE SELECT DE GAME
     ctx.games.forEach(element => {
         const opt = document.createElement('option');
         opt.value = element.gameID;
@@ -157,7 +156,8 @@ function updateTeamChosen() {
 
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
-    let i = gameChoice.game.value;
+    //let i = gameChoice.game.value;
+    let i = 7298; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
     }

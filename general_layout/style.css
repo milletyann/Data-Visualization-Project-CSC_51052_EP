@@ -13,6 +13,11 @@ svg {
 
 }
 
+.smoothFading {
+    visibility: hidden;
+    transition: visibility 0.4s ease;
+}
+
 body {
     position: absolute;
     width: 100%;
@@ -78,10 +83,10 @@ body {
     padding: 20px 30px;
     font-size: 16px;
     cursor: pointer;
-    background: rgb(126, 126, 126);
+    background-color: rgb(126, 126, 126);
     border: 2px solid rgb(85, 85, 85);
     border-radius: 4px;
-    transition: background 0.4s ease;
+    transition: background-color 0.4s ease;
     width: 300px;
 
 }
@@ -115,15 +120,20 @@ body {
 
 #list-left, #list-right {
     border: 1px solid whitesmoke;
+    flex: 1;
 }
 
 #list-left .player-name, #list-right .player-name {
-    margin: 5px;
-    padding: 10px;
+    margin: 2px;
+    padding: 7px;
     background: rgb(75, 75, 235);
     list-style: none;
 }
 
+#svg-container-part2 {
+    flex: 2,
+    
+}
 
 
 /* ------- Section 3 ------- */
