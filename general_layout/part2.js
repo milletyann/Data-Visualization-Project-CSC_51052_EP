@@ -95,6 +95,7 @@ function displayBarChart(topN, path) {
     c2.yScale = d3.scaleLinear().domain([0, maxVal]).range([c2.chartHeight, 0]);
 
     const svgContainer = d3.select("#svgPart2");
+    svgContainer.selectAll("*").remove();
 
     const lc = svgContainer.lastElementChild;
     while (lc) {
