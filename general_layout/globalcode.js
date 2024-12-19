@@ -157,7 +157,7 @@ function updateTeamChosen() {
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
     //let i = gameChoice.game.value;
-    let i = 7298; // TO DELETE !! JUST IN DEVELOPMENT
+    let i = 7567; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
     }
