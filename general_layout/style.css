@@ -10,7 +10,7 @@ svg {
     padding: 0;
     border: 0;
     margin: 0;
-
+    overflow-x: hidden;/**/
 }
 
 .smoothFading {
@@ -26,9 +26,7 @@ body {
 }
 
 #landing {
-    border: 1px solid green;
-    width: calc(100% - 2px); /* Use calc for better readability */
-    width: 100%;
+    width: calc(100% -20px);
     height: 100px;
     background: #333;
     padding: 10px;
@@ -54,8 +52,7 @@ body {
 /* All sections */
 .section {
     position: relative;
-    width: calc(100% - 2px); /* Use calc for better readability */
-    min-height: 150px; /* to delete when section are filled */
+    width: calc(100% - 20px); /* -2*10px de padding */
     padding: 10px;
     background: #444;
     margin-bottom: 10px;
@@ -131,12 +128,13 @@ body {
 }
 
 #svg-container-part2 {
-    flex: 2,
+    flex: 2;
     
 }
 
 
 /* ------- Section 3 ------- */
+
 #teamsViz {
     border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
 }
@@ -287,7 +285,7 @@ body {
 /* ------- Footer ------- */
 
 footer {
-    width: calc(100% - 2px);
+    width: calc(100% - 100px); /* -4*25px pour les padding et margin */
     margin: 25px;
     padding: 25px;
     text-align: center;
