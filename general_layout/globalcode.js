@@ -14,11 +14,13 @@ function initPage() {
     let part2svgEl = d3.select("#svg-container-part2").append("svg").attr("id", "svgPart2");
     part2svgEl.attr("width", c2.WIDTH);
     part2svgEl.attr("height", c2.HEIGHT);
-    //initializeButtons();
     
     // initial SVG elements creations for PART 3
-    //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
-    updateGameChosen();
+
+
+    loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    populateMetricsList();
+    //updateGameChosen();
 };
 
 function createViz() {

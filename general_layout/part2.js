@@ -53,7 +53,7 @@ function vizPart2() {
     c2.homePlayers = extractPlayers(ctx.currentGameID, ctx.gameData[0].team.name, true);
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
 
-    populateMetricsList();
+    //populateMetricsList();
     iterateEvents();
     //setDefaultStats();
 }
