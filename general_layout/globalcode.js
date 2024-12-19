@@ -12,8 +12,8 @@ function initPage() {
     // initial SVG elements creations for PART 1
     // initial SVG elements creations for PART 2
     let part2svgEl = d3.select("#svg-container-part2").append("svg").attr("id", "svgPart2");
-    part2svgEl.attr("width", c2.WIDTH);
-    part2svgEl.attr("height", c2.HEIGHT);
+    part2svgEl.attr("width", c2.svgWIDTH);
+    part2svgEl.attr("height", c2.svgHEIGHT);
     
     // initial SVG elements creations for PART 3
 
@@ -159,7 +159,7 @@ function updateTeamChosen() {
 // called when the fourth select of the form is modified
 function updateGameChosen() {
     //let i = gameChoice.game.value;
-    let i = 7567; // TO DELETE !! JUST IN DEVELOPMENT
+    let i = 3943077; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
     };

@@ -1,7 +1,8 @@
 c2 = {
     // part2 svg size
-    HEIGHT: 480,
-    WIDTH: 820,
+    svgHEIGHT: 400,
+    svgWIDTH: 800,
+    margin: { top: 20, right: 20, bottom: 30, left: 50 },
     // players lists
     homePlayers: [],
     awayPlayers: [],
@@ -47,17 +48,19 @@ c2 = {
         {name: "goalkeeper-punch", text: "Punches"},
     ],
     // Number of players displayed in the chart
-    n: 5,
+    n: 10,
 };
+
+const chartWidth = svgWIDTH - margin.left - margin.right;
+const chartHeight = svgHEIGHT - margin.top - margin.bottom;
 
 function vizPart2() {
     // List all players that played
     c2.homePlayers = extractPlayers(ctx.currentGameID, ctx.gameData[0].team.name, true);
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
 
-    //populateMetricsList();
+    populateMetricsList();
     iterateEvents();
-    //setDefaultStats();
 }
 
 /* ------- HTML related functions ------- */
@@ -85,12 +88,10 @@ function populateMetricsList() {
 
 /* ------- Populating SVG ------- */
 
-function setDefaultStats() {
-    console.log("Je remplis les svg avec des choix par defaults");
-    // choix des joueurs à comparer en 1v1
-    // choix de la stat à faire pour comparer le top 10
-}
+function displayBarChart(topN, path) {
+    const ext = d3.extent(topN, o => getPropertyValue(o, path));
 
+}
 
 
 /* ------- Transitions SVG ------- */
@@ -105,18 +106,11 @@ function handleListItemClick(item_name) {
         const valueB = getPropertyValue(b, path) || 0;
         return valueB - valueA;
     });
-    
+
     topN = combine.slice(0,c2.n);
-}
 
-function getPropertyValue(obj, pathArray) {
-    let val = obj['stats'];
-    for (let i=0; i<pathArray.length;i++) {
-        val = val[pathArray[i]];
-    };
-    return val;
+    displayBarChart(topN, path);
 }
-
 
 /* ------- Data Extraction ------- */
 
@@ -347,11 +341,17 @@ function findPlayer(id_player) {
         player = c2.awayPlayers.find(pl => pl.id === id_player);
         return player;
     }
-}
+};
 
 function fromYardsToMeters(value) {
     return 0.9144*value;
-}
+};
 
-// fonction pour trier les tops players en fonction d'une certaine stats
-// fonctions annexes pour calculer des trucs (temps de jeu, distance courue...)
+function getPropertyValue(obj, pathArray) {
+    // idea: .reduce() for cleaner syntax
+    let val = obj['stats'];
+    for (let i=0; i<pathArray.length;i++) {
+        val = val[pathArray[i]];
+    };
+    return val;
+};
