@@ -48,11 +48,8 @@ c2 = {
         {name: "goalkeeper-punch", text: "Punches"},
     ],
     // Number of players displayed in the chart
-    n: 10,
+    n: 5,
 };
-
-const chartWidth = svgWIDTH - margin.left - margin.right;
-const chartHeight = svgHEIGHT - margin.top - margin.bottom;
 
 function vizPart2() {
     // List all players that played
@@ -89,8 +86,36 @@ function populateMetricsList() {
 /* ------- Populating SVG ------- */
 
 function displayBarChart(topN, path) {
-    const ext = d3.extent(topN, o => getPropertyValue(o, path));
+    const maxVal = d3.max(topN, o => getPropertyValue(o, path));
+    const chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
+    const chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
 
+    const xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, chartWidth]).padding(0.1);
+    const yScale = d3.scaleLinear().domain([0, maxVal]).range([chartHeight, 0]);
+
+    const svgContainer = d3.select("#svgPart2");
+
+    const mainG = svgContainer.append("g")
+        .attr("transform", `translate(${c2.margin.left},${c2.margin.top})`)
+        .attr("id", "mainG");
+
+    mainG.append("g")
+        .call(d3.axisLeft(yScale))
+        .attr("class", "y-axis");
+
+    const barGroups = mainG.selectAll(".bar-group")
+        .data(topN)
+        .enter()
+        .append("g")
+        .attr("class", "bar-group")
+        .attr("transform", d => `translate(${xScale(d.name)}, 0)`);
+
+    barGroups.append("rect")
+        .attr("x", d => xScale(d.name)) // NaN
+        .attr("y", d => yScale(getPropertyValue(d, path))) // NaN
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => chartHeight - yScale(getPropertyValue(d, path)))
+        .attr("fill", "red");
 }
 
 
@@ -108,7 +133,6 @@ function handleListItemClick(item_name) {
     });
 
     topN = combine.slice(0,c2.n);
-
     displayBarChart(topN, path);
 }
 
