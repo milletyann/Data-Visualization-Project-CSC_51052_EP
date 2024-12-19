@@ -120,8 +120,8 @@ function displayBarChart(topN, path) {
         .enter()
         .append("g")
         .attr("class", "bar-group")
-        .attr("transform", (d, i)=> `translate(${(i+1/3)*xSpacing}, 0)`)
         .attr("y", d => c2.xScale(getPropertyValue(d, path)))
+        .attr("transform", (d, i)=> `translate(${(i+1/3)*xSpacing}, ${c2.yScale(getPropertyValue(d, path))})`);
         
     barGroups.append('rect')
         .attr("width", c2.xScale.bandwidth() - 20)
