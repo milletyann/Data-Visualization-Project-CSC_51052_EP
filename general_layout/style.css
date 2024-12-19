@@ -71,27 +71,8 @@ body {
 
 #controls-part2 {
     display: flex;
-    justify-content: center;
+    justify-content: center;/**/
     margin: 20px;
-}
-
-.toggle-button {
-    margin: 0 10px;
-    padding: 20px 30px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: rgb(126, 126, 126);
-    border: 2px solid rgb(85, 85, 85);
-    border-radius: 4px;
-    transition: background-color 0.4s ease;
-    width: 300px;
-
-}
-
-#controls-part2 .selected {
-    background: rgb(60, 60, 60);
-    color: white;
-    border-color: #477cad;
 }
 
 #content-part2 {
@@ -103,35 +84,60 @@ body {
     padding: 20px;
 }
 
-#content-part2 h3 {
-    border: 1px solid rgb(218, 214, 214);
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-}
 
 #content-part2 li {
     padding: 10px;
     margin: 5px;
 }
 
-#list-left, #list-right {
+#list-left {
+    position: relative;
     border: 1px solid whitesmoke;
+    width: 100px;
     flex: 1;
 }
 
-#list-left .player-name, #list-right .player-name {
+#list-left h3 {
+    border: 1px solid rgb(218, 214, 214);
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+#list-left .metrics {
     margin: 2px;
     padding: 7px;
     background: rgb(75, 75, 235);
     list-style: none;
 }
 
-#svg-container-part2 {
-    flex: 2;
-    
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
+ul li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ddd;
+    margin: 5px 0;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+ul li:hover {
+    background-color: #bbb;
+}
+
+#svg-container-part2 {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ------- Section 3 ------- */
 

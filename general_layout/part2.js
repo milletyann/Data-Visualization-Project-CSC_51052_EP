@@ -2,25 +2,16 @@ c2 = {
     // part2 svg size
     HEIGHT: 480,
     WIDTH: 820,
-    // visualization 1 selected (true if players-comparison, false if players-ranking)
-    viz: true,
     // players lists
     homePlayers: [],
     awayPlayers: [],
-    // 
-    comparedPlayers: {
-        home: null,
-        away: null,
-    }
 };
 
 function vizPart2() {
     // List all players that played
     c2.homePlayers = extractPlayers(ctx.currentGameID, ctx.gameData[0].team.name, true);
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
-    console.log(c2.homePlayers);
-    console.log(c2.awayPlayers);
-    //populateSideLists();
+    //populateMetricsList();
     // Pass over all the file to fill the stats object of the players
     iterateEvents();
     // Display defaults stats (first players of their team for example)
@@ -89,37 +80,23 @@ function initializeLeftListRanking() {
     console.log(c2.homePlayers[0].stats);
 }
 
-function populateSideLists() {
+function populateMetricsList(data) {
     const leftList = document.getElementById("list-left");
-    c2.homePlayers.forEach(item => {
-        const li = document.createElement("li");
-        li.classList.add("player-name");
-        li.textContent = item.name;
-        li.addEventListener("click", () => handleLeftListClick(item));
-        leftList.appendChild(li);
+
+    // Clear existing list items
+    while (leftList.firstChild) {
+      leftList.removeChild(leftList.firstChild);
+    }
+
+    // Populate with new data
+    data.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item.name;
+      li.dataset.action = item.action; // Store the action in a data attribute
+      li.addEventListener("click", () => handleListItemClick(item));
+      leftList.appendChild(li);
     });
-
-    const rightList = document.getElementById("list-right");
-    c2.awayPlayers.forEach(item => {
-        const li = document.createElement("li");
-        li.classList.add("player-name");
-        li.textContent = item.name;
-        li.addEventListener("click", () => handleRightListClick(item));
-        rightList.appendChild(li);
-    });
-}
-
-function handleLeftListClick(item) {
-    c2.comparedPlayers.home = item;
-    console.log(item);
-    triggerUpdatePlayerComparison(item, null);
-}
-
-function handleRightListClick(item) {
-    c2.comparedPlayers.away = item;
-    console.log(item);
-    triggerUpdatePlayerComparison(null, item);
-}
+  }
 
 /* ------- Populating SVG ------- */
 
@@ -133,10 +110,6 @@ function setDefaultStats() {
 
 /* ------- Transitions SVG ------- */
 
-// updates the visualizations for the player that triggered the function (in practice there is always one of the 2 parameters that is null)
-function triggerUpdatePlayerComparison(homePlayer, awayPlayer) {
-    console.log("j'update la visu pour changer un joueur");
-}
 
 
 /* ------- Data Extraction ------- */
@@ -350,7 +323,7 @@ function iterateEvents() {
         };
     });
     c2.homePlayers.forEach(j => {
-        //console.log(j);
+        console.log(j);
     });
     // a la fin de cette fonction on a des données utilisables
 };

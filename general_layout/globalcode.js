@@ -17,8 +17,8 @@ function initPage() {
     //initializeButtons();
     
     // initial SVG elements creations for PART 3
-    loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
-    //updateGameChosen();
+    //loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    updateGameChosen();
 };
 
 function createViz() {
@@ -156,18 +156,16 @@ function updateTeamChosen() {
 
 // called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
 function updateGameChosen() {
-    let i = gameChoice.game.value;
-    //let i = 7567; // TO DELETE !! JUST IN DEVELOPMENT
+    //let i = gameChoice.game.value;
+    let i = 7567; // TO DELETE !! JUST IN DEVELOPMENT
     if (i === "Select a game") {
         return;
-    }
-    console.log("You selected the game: " + i);
+    };
 
     ctx.currentGameID = i;
-    console.log("event file: ", "../data/events/" + i + ".json");
     d3.json("../data/events/" + i + ".json").then(function(data) {
-        console.log("Game file " + i + ".json is loaded");
         ctx.gameData = data;
+        console.log("Game file " + i + ".json is loaded");
         // simple load so everyone can access this in its own js file and treat it like he wants
         createViz();
     });
