@@ -1,0 +1,221 @@
+svg {
+    display: block;
+    font-family: sans-serif;
+    font-size: 10px;
+}
+
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    position: absolute;
+    width: 100%;
+    background: rgb(86, 82, 82);
+    color: #fff;
+}
+
+#landing {
+    border: 1px solid green;
+    width: calc(100% - 2px); /* Use calc for better readability */
+    height: 100px;
+    background: #333;
+    padding: 10px;
+}
+
+#landing .menu form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#landing .menu form select {
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* All sections */
+.section {
+    position: relative;
+    width: calc(100% - 2px); /* Use calc for better readability */
+    min-height: 150px; /* to delete when section are filled */
+    padding: 10px;
+    background: #444;
+    margin-bottom: 10px;
+}
+
+/* Section 1 */
+#gameViz {
+    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+/* Section 2 */
+#playersViz {
+    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+/* Section 3 */
+#teamsViz {
+    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px; /* Padding for aesthetic spacing */
+    background-color: #eee9e9;
+    color: white;
+    border: 1px solid grey;
+}
+
+.navbar button {
+    background: #d2d8de;
+    border: none;
+    padding: 10px 20px;
+    color: rgb(28, 6, 60);
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.navbar button:hover, .navbar button.active {
+    background-color: #0073e6;
+}
+
+#match-stats {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #555;
+}
+
+.stat-row-team-names {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    justify-content: space-around;
+}
+
+.team-name {
+    height: 30px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.stat-value-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.stat-name {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.1em;
+    color: #fff;
+}
+
+.stat-value {
+    width: 100px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #fff;
+}
+
+.stat-value.home {
+    text-align: right;
+    padding-right: 10px; 
+}
+
+.stat-value.away {
+    text-align: left;
+    padding-left: 10px; 
+}
+
+.bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    position: relative;
+    height: 10px; /* Increase the height for better visibility */
+    background-color: #dad5d5; /* Optional: background to enhance visibility */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.stat-bar {
+    height: 10px;
+    position: absolute;
+    transition: width 0.5s ease-in-out; /* Add transition for animation */
+}
+
+.stat-bar.home {
+    right: 50%; /* Starts from the center */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #b30000; /* Red color for home team */
+    transform: translateX(-0.5%);
+    border-color: #b30000;
+}
+
+.stat-bar.away {
+    left: 50%; /* Starts from the center */
+    background-color: #0000b3; /* Blue color for away team */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: translateX(0.5%);
+}
+
+.stat-bar.hidden {
+    display: none;
+}
+.origin-line {
+    position: absolute;
+    width: 2px; /* Width of the vertical line */
+    height: 10px; /* Height equal to the bar chart height */
+    background-color: #fff; /* Color of the vertical line */
+    left: 50%;
+    transform: translateX(-50%);
+}
+#lineups {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+}
+
+#lineups svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+footer {
+    width: calc(100% - 2px);
+    margin: 25px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid grey;
+    background: #333;
+    color: #fff;
+}
