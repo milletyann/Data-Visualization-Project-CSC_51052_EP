@@ -1,0 +1,363 @@
+{
+  "LIV_CHE_2019": {
+    "file": "LIV_[2]-1_CHE.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Chelsea",
+          "score": 1,
+          "logo": "data/logos/Chelsea_FC.svg"
+        }
+      }
+    },
+    "filter": null
+  },
+  "BAR_RMA_2012": {
+    "file": "Real_vs_Barcelona_Calma.csv",
+    "competition": "La Liga",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Barcelona",
+          "score": 1,
+          "logo": "data/logos/FC_Barcelona_(crest).svg"
+        },
+        "away": {
+          "name": "Real Madrid",
+          "score": 2,
+          "logo": "data/logos/Real_Madrid_CF.svg"
+        }
+      }
+    },
+    "filter": null
+  },
+  "BAY_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "UEFA Champions League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Bayern",
+          "score": 1,
+          "logo": "data/logos/FC_Bayern_München_logo_(2024).svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 3,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Bayern 0 - [1] Liverpool"
+  },
+  "LIV_BAR_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "UEFA Champions League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 4,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Barcelona",
+          "score": 0,
+          "logo": "data/logos/FC_Barcelona_(crest).svg"
+        }
+      }
+    },
+    "filter": "Liverpool [4] - 0 Barcelona"
+  },
+  "LIV_MCI_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Manchester City",
+          "score": 0,
+          "logo": "data/logos/Manchester_City_FC_badge.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [2] - 0 Man City"
+  },
+  "LIV_BOU_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 3,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Bournemouth",
+          "score": 0,
+          "logo": "data/logos/AFC_Bournemouth_(2013).svg"
+        }
+      }
+    },
+    "filter": "Liverpool [3] - 0 Bournemouth"
+  },
+  "FUL_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Fulham",
+          "score": 0,
+          "logo": "data/logos/Fulham_FC_(shield).svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 1,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Fulham 0 - [1] Liverpool"
+  },
+  "SOU_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Southampton",
+          "score": 1,
+          "logo": "data/logos/FC_Southampton.svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Southampton 1 - [2] Liverpool"
+  },
+  "LIV_POR_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "UEFA Champions League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Porto",
+          "score": 0,
+          "logo": "data/logos/FC_Porto.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [2] - 0 Porto"
+  },
+  "POR_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "UEFA Champions League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Porto",
+          "score": 0,
+          "logo": "data/logos/FC_Porto.svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Porto 0 - [2] Liverpool"
+  },
+  "LIV_WOL_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 1,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Wolves",
+          "score": 0,
+          "logo": "data/logos/Wolverhampton_Wanderers_FC_crest.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [1] - 0 Wolves"
+  },
+  "LIV_NOR_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 3,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Norwich",
+          "score": 0,
+          "logo": "data/logos/Norwich_City_FC_logo.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [3] - 0 Norwich"
+  },
+  "LIV_NEW_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Newcastle",
+          "score": 1,
+          "logo": "data/logos/Newcastle_United_Logo.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [2] - 1 Newcastle"
+  },
+  "LIV_SAL_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "UEFA Champions League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Salzburg",
+          "score": 0,
+          "logo": "data/logos/FC_Red_Bull_Salzburg_logo.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [2] - 0 Salzburg"
+  },
+  "GNK_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "UEFA Champions League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Genk",
+          "score": 0,
+          "logo": "data/logos/KRC_Genk_Logo_2016.svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 2,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Genk 0 - [3] Liverpool"
+  },
+  "LIV_EVE_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 1,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Everton",
+          "score": 0,
+          "logo": "data/logos/Everton_FC_logo.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [1] - 0 Everton"
+  },
+  "BOU_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Bournemouth",
+          "score": 0,
+          "logo": "data/logos/AFC_Bournemouth_(2013).svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 3,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Bournemouth 0 - 3 Liverpool"
+  },
+  "LIV_WAT_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Liverpool",
+          "score": 1,
+          "logo": "data/logos/Liverpool_FC.svg"
+        },
+        "away": {
+          "name": "Watford",
+          "score": 0,
+          "logo": "data/logos/Watford.svg"
+        }
+      }
+    },
+    "filter": "Liverpool [1] - 0 Watford"
+  },
+  "LEI_LIV_2019": {
+    "file": "liverpool_2019.csv",
+    "competition": "Premier League",
+    "config": {
+      "teams": {
+        "home": {
+          "name": "Leicester",
+          "score": 0,
+          "logo": "data/logos/Leicester_City_crest.svg"
+        },
+        "away": {
+          "name": "Liverpool",
+          "score": 3,
+          "logo": "data/logos/Liverpool_FC.svg"
+        }
+      }
+    },
+    "filter": "Leicester 0 - [3] Liverpool"
+  }
+}
