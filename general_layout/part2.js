@@ -5,98 +5,81 @@ c2 = {
     // players lists
     homePlayers: [],
     awayPlayers: [],
+    // Metrics to be proposed in the left list menu
+    metrics: [
+        {name: "general-minutes_played", text: "Playing Time"},
+        {name: "general-goals_scored", text: "Goals"},
+        {name: "general-cards-yellow", text: "Yellow Cards"},
+        {name: "general-cards-red", text: "Red Cards"},
+        {name: "general-shots-total", text: "Total Shots"},
+        {name: "general-shots-left_foot", text: "Left Foot Shots"},
+        {name: "general-shots-right_foot", text: "Right Foot Shots"},
+        {name: "general-shots-head", text: "Head Shots"},
+        {name: "general-balls_touched", text: "Balls Touched"},
+        {name: "general-distance_ran_with_ball", text: "Distance with Ball"},
+        {name: "general-time_with_ball", text: "Time with Ball"},
+        {name: "defense-tackles_successful", text: "Tackles Completed"},
+        {name: "defense-tackles_missed", text: "Tackles Missed"},
+        {name: "defense-interceptions", text: "Interceptions"},
+        {name: "defense-aerials_won", text: "Aerials Won"},
+        {name: "defense-aerials_loss", text: "Aerials Lost"},
+        {name: "defense-faults", text: "Faults"},
+        {name: "defense-dribbles_suffered", text: "Dribbles Suffered"},
+        {name: "defense-own_goals", text: "Own Goals"},
+        {name: "attack-faults_won", text: "Faults Provoked"},
+        {name: "attack-dribbles_successful", text: "Dribbles Won"},
+        {name: "attack-dribbles_missed", text: "Dribbles Lost"},
+        {name: "attack-offsides", text: "Offsides"},
+        {name: "attack-xG", text: "xG"},
+        {name: "attack-xG_diff", text: "xG Difference"},
+        {name: "attack-xG_per_shot", text: "xG per Shot"},
+        {name: "passing-assists", text: "Assists"},
+        {name: "passing-key_passes", text: "Key Passes"},
+        {name: "passing-passes_successful", text: "Completed Passes"},
+        {name: "passing-passes_missed", text: "Missed Passes"},
+        {name: "passing-avg_pass_length", text: "Average Pass Length"},
+        {name: "passing-ball_loss", text: "Ball Losses"},
+        {name: "goalkeeper-goals_conceded", text: "Goals Conceded"},
+        {name: "goalkeeper-penalty_conceded", text: "Conceded Penalties"},
+        {name: "goalkeeper-penalty_saved", text: "Saved Penalties"},
+        {name: "goalkeeper-shots_saved", text: "Saved Shots"},
+        {name: "goalkeeper-digs_successful", text: "Successful Digs"},
+        {name: "goalkeeper-punch", text: "Punches"},
+    ],
 };
 
 function vizPart2() {
     // List all players that played
     c2.homePlayers = extractPlayers(ctx.currentGameID, ctx.gameData[0].team.name, true);
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
-    //populateMetricsList();
-    // Pass over all the file to fill the stats object of the players
+
+    populateMetricsList();
     iterateEvents();
-    // Display defaults stats (first players of their team for example)
     //setDefaultStats();
 }
 
 /* ------- HTML related functions ------- */
 
-function initializeButtons() {
-    const btn1 = document.getElementById("players-comparison");
-    const btn2 = document.getElementById("players-ranking");
-
-    btn1.addEventListener("click", () => toggleVisualizationPart2(btn1, btn2));
-    btn2.addEventListener("click", () => toggleVisualizationPart2(btn2, btn1));
-}
-
-// Called to switch between the 2 types of visualization (players comparison 2 by 2, players ranking)
-function toggleVisualizationPart2(selectedBtn, otherBtn) {
-    selectedBtn.classList.add("selected");
-    otherBtn.classList.remove("selected");
-
-    //svg.selectAll("*").remove();
-    if (selectedBtn.id === "players-comparison") {
-        if (c2.viz) {
-            return;
-        } else {
-            c2.viz = !c2.viz;
-            console.log("Toggle Versus");
-            // METTRE ICI LES TRANSITIONS VERS LA VIZ DES COMPARAISONS
-            //addLists();
-        }
-    } else {
-        if (!c2.viz) {
-            return;
-        } else {
-            c2.viz = !c2.viz;
-            console.log("Toggle Global");
-            // METTRE ICI LE CHANGEMENT VERS LA VIZ DES RANKING JOUEURS
-            //removeLists();
-            // Initialiser la liste de gauche pour la visu des rankings
-            //initializeLeftListRanking();
-        }
-    }
-};
-
-function addLists() {
-    let leftList = document.getElementById("list-left");
-    leftList.classList.remove("smoothFading");
-    let rightList = document.getElementById("list-right");
-    rightList.classList.remove("smoothFading");
-}
-
-function removeLists() {
-    let leftList = document.getElementById("list-left");
-    leftList.classList.add("smoothFading");
-    let rightList = document.getElementById("list-right");
-    rightList.classList.add("smoothFading");
-}
-
-function initializeLeftListRanking() {
-    // clear la liste
-    const leftList = document.getElementById("list-left");
-    while (leftList.lastChild) {
-        leftList.removeChild(leftList.lastChild);
-    };
-    console.log(c2.homePlayers[0].stats);
-}
-
-function populateMetricsList(data) {
+function populateMetricsList() {
     const leftList = document.getElementById("list-left");
 
-    // Clear existing list items
     while (leftList.firstChild) {
       leftList.removeChild(leftList.firstChild);
-    }
+    };
 
-    // Populate with new data
-    data.forEach(item => {
+    const h3 = document.createElement("h3");
+    h3.innerHTML = "Metrics";
+    leftList.appendChild(h3);
+    const ul = document.createElement("ul");
+    leftList.appendChild(ul);
+
+    c2.metrics.forEach(item => {
       const li = document.createElement("li");
-      li.textContent = item.name;
-      li.dataset.action = item.action; // Store the action in a data attribute
-      li.addEventListener("click", () => handleListItemClick(item));
-      leftList.appendChild(li);
+      li.textContent = item.text;
+      li.addEventListener("click", () => handleListItemClick(item.name));
+      ul.appendChild(li);
     });
-  }
+}
 
 /* ------- Populating SVG ------- */
 
@@ -110,6 +93,10 @@ function setDefaultStats() {
 
 /* ------- Transitions SVG ------- */
 
+function handleListItemClick(item_name) {
+    let path = item_name.split('-');
+    console.log(path);
+}
 
 
 /* ------- Data Extraction ------- */

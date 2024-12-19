@@ -79,7 +79,7 @@ body {
     margin: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
     padding: 20px;
 }
@@ -92,13 +92,19 @@ body {
 
 #list-left {
     position: relative;
-    border: 1px solid whitesmoke;
-    width: 100px;
+    border: 1px solid rgba(245, 245, 245, 0.554);
+    border-radius: 5px;
+    max-height: 400px;
     flex: 1;
+
+    /* Hide scrollbar on different browsers */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 #list-left h3 {
     border: 1px solid rgb(218, 214, 214);
+    border-radius: 5px;
     margin: 10px;
     padding: 10px;
     text-align: center;
@@ -111,13 +117,14 @@ body {
     list-style: none;
 }
 
-ul {
+#list-left ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-ul li {
+#list-left ul li {
+    color: black;
     padding: 10px;
     cursor: pointer;
     background-color: #ddd;
@@ -127,7 +134,7 @@ ul li {
     transition: background-color 0.3s;
 }
 
-ul li:hover {
+#list-left ul li:hover {
     background-color: #bbb;
 }
 
