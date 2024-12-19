@@ -87,12 +87,14 @@ function populateMetricsList() {
 /* ------- Populating SVG ------- */
 
 function displayBarChart(topN, path) {
-    const maxVal = d3.max(topN, o => getPropertyValue(o, path));
+    const ext = d3.extent(topN, o => getPropertyValue(o, path));
     c2.chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
     c2.chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
 
     c2.xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, c2.chartWidth]).align(0);
-    c2.yScale = d3.scaleLinear().domain([0, maxVal]).range([c2.chartHeight, 0]);
+    let minVal;
+    ext[0] < 0 ? minVal = ext[0] : minVal = 0; // Sera utile quand j'aurais trouvé comment bien représenter la xG_diff
+    c2.yScale = d3.scaleLinear().domain([minVal, ext[1]]).range([c2.chartHeight, 0]);
 
     const svgContainer = d3.select("#svgPart2");
     svgContainer.selectAll("*").remove();
@@ -128,7 +130,7 @@ function displayBarChart(topN, path) {
     barGroups.append('rect')
         .attr("width", c2.xScale.bandwidth() - 20)
         .attr("height", d => c2.chartHeight - c2.yScale(getPropertyValue(d, path)))
-        .attr("fill", "blue")
+        .attr("fill", "red")
         .append("title").text(d => `Name : ${d.name} \nTeam : ${d.team.name} \nJersey n° : ${d.jersey_number} \nPlays ${d.position}`);
 }
 
