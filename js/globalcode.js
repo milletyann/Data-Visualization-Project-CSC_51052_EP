@@ -36,7 +36,7 @@ function createViz() {
 /* ---- Adapt menu and data loading files ---- */
 
 function loadCompetitions() {
-    d3.json("../data/competitions.json").then(
+    d3.json("./data/competitions.json").then(
         function(data) {
             let compSelect = document.getElementById("competition");
             
@@ -99,7 +99,7 @@ function updateSeasonChosen() {
     });
 
     let teamSelect = document.getElementById("team");
-    ctx.path = `../data/matches/` + ctx.currentCompID + `/` + ctx.currentSeasonID + `.json`; // current json of matches (for 1 comp 1 year)
+    ctx.path = `./data/matches/` + ctx.currentCompID + `/` + ctx.currentSeasonID + `.json`; // current json of matches (for 1 comp 1 year)
     d3.json(ctx.path).then(function(data) {
         ctx.teams = [];
         data.forEach(element => {
@@ -174,7 +174,7 @@ function updateGameChosen() {
     console.log("Home Team Name:", ctx.homeTeamId_name, "Away Team Name:", ctx.awayTeamId_name);
 
     ctx.currentGameID = i;
-    d3.json("../data/events/" + i + ".json").then(function(data) {
+    d3.json("./data/events/" + i + ".json").then(function(data) {
         ctx.gameData = data;
         console.log("Game file " + i + ".json is loaded");
         // simple load so everyone can access this in its own js file and treat it like he wants

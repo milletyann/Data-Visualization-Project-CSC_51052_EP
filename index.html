@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Football Game Analysis - Dashboard</title>
+    <!-- d3js import -->
+    <script src="js/d3.v7.min.js" type="text/javascript"></script>
+    <!-- Custom D3 Soccer Pitch Library -->
+    <script src="js/custom-d3-soccer.min.js" type="text/javascript"></script>
+    <script>
+        const custom_d3_soccer = d3; // Alias for our modified d3-soccer library
+    </script>
+    <script src="js/match_stat.js" type="text/javascript"></script>
+    <script src="js/globalcode.js" type="text/javascript"></script>
+    <script src="js/part2.js" type="text/javascript"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body onload="initPage()">
+<!-- Gloire's part -->
+<section class="section" id="gameViz">
+    <iframe id="matchVizFrame" src="match_viz.html" style="width: 100%; height: 600px; border: none;"></iframe>
+</section>
+<section id="landing">
+    <div class="title"></div>
+    <div class="menu">
+        <form name="gameChoice">
+            <select id="competition" name="competition" onchange="updateCompetitionChosen()">
+                <option>Select a competition</option>
+            </select>
+            <select id="season" name="season" onchange="updateSeasonChosen()">
+                <option>Select a season</option>
+            </select>
+            <select id="team" name="team" onchange="updateTeamChosen()">
+                <option>Select a team</option>
+            </select>
+            <select id="game" name="game" onchange="updateGameChosen()">
+                <option>Select a game</option>
+            </select>
+        </form>
+    </div>
+</section>
+<!-- Yann's part -->
+<section class="section" id="playersViz">
+    <div class="tooltip">Hover over me
+        <span class="tooltiptext">Tooltip text</span>
+    </div>
+
+    <div id="content-part2">
+        <div id="list-left">
+            <h3>Metrics</h3>
+        </div>
+        <div id="svg-container-part2"></div>
+    </div>
+</section>
+<!-- Yong's part -->
+<section class="section" id="teamsViz">
+    <nav class="navbar">
+        <button id="match-stats-btn">Match Stats</button>
+        <button id="lineups-btn">Lineups</button>
+    </nav>
+
+    <div id="content">
+        <div class="content-section" id="match-stats" style="display: none;">
+        </div>
+        <div class="content-section" id="lineups"></div>
+    </div>
+</section>
+<footer>
+    <div>
+        <p>Data Visualization Project - 2024/2025</p>
+        <p>Created by Yann Millet (Data AI), Gloire Linvani (Data AI), Yong Mok (X)</p>
+        <p>Teachers: Emmanuel Pietriga (X, Inria), Olivier Gladin (X, Inria)</p>
+    </div>
+</footer>
+</body>
+</html>
