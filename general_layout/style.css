@@ -1,0 +1,340 @@
+svg {
+    display: block;
+    font-family: sans-serif;
+    font-size: 10px;
+}
+
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    overflow-x: hidden;
+
+    /* Hide scrollbar on different browsers */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body {
+    position: absolute;
+    width: 100%;
+    background: rgb(86, 82, 82);
+    color: #fff;
+}
+
+#landing {
+    width: calc(100% -20px);
+    height: 100px;
+    background: #333;
+    padding: 10px;
+}
+
+#landing .menu form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#landing .menu form select {
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* All sections */
+.section {
+    position: relative;
+    width: calc(100% - 20px); /* -2*10px de padding */
+    padding: 10px;
+    background: #444;
+    margin-bottom: 10px;
+}
+
+/* ------- Section 1 ------- */
+#gameViz {
+    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+/* ------- Section 2 ------- */
+#playersViz {
+    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+}
+
+
+#controls-part2 {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#content-part2 {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+
+#content-part2 li {
+    padding: 10px;
+    margin: 5px;
+}
+
+#list-left {
+    position: relative;
+    border: 1px solid rgba(245, 245, 245, 0.554);
+    border-radius: 5px;
+    max-height: 400px;
+    flex: 1;
+}
+
+#list-left h3 {
+    border: 1px solid rgb(218, 214, 214);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+#list-left .metrics {
+    margin: 2px;
+    padding: 7px;
+    background: rgb(75, 75, 235);
+    list-style: none;
+}
+
+#list-left ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#list-left ul li {
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ddd;
+    margin: 5px 0;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#list-left ul li:hover {
+    background-color: #bbb;
+}
+
+#svg-container-part2 {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* tooltip test */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ------- Section 3 ------- */
+
+#teamViz {
+    background-color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px; /* Padding for aesthetic spacing */
+    background-color: #eee9e9;
+    color: white;
+    border: 1px solid grey;
+}
+
+.navbar button {
+    background: #d2d8de;
+    border: none;
+    padding: 10px 20px;
+    color: rgb(28, 6, 60);
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1em;	
+    font-weight: bold;	
+}
+
+.navbar button:hover, .navbar button.active {
+    background-color: #0073e6;
+}
+
+#match-stats {
+    width: 100% - 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: white;
+
+}
+
+.stat-row-team-names {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    justify-content: space-around;
+}
+
+.team-name {
+    height: 30px;
+    font-size: 1.3em;
+    color: black;
+    font-weight: bold;
+    
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.stat-value-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.stat-name {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.1em;
+    color: black;
+    font-weight: bold;
+}
+
+.stat-value {
+    width: 100px;
+    text-align: center;
+    font-size: 1.1em;
+    color: black;
+    font-weight: bold;
+}
+
+.stat-value.home {
+    text-align: right;
+    padding-right: 10px; 
+}
+
+.stat-value.away {
+    text-align: left;
+    padding-left: 10px; 
+}
+
+.bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    position: relative;
+    height: 10px; /* Increase the height for better visibility */
+    background-color: #9f9b9b; /* Optional: background to enhance visibility */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.stat-bar {
+    height: 10px;
+    position: absolute;
+    transition: width 0.5s ease-in-out; /* Add transition for animation */
+}
+
+.stat-bar.home {
+    right: 50%; /* Starts from the center */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #b30000; /* Red color for home team */
+    transform: translateX(-0.5%);
+    border-color: #b30000;
+}
+
+.stat-bar.away {
+    left: 50%; /* Starts from the center */
+    background-color: #0000b3; /* Blue color for away team */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: translateX(0.5%);
+}
+
+.stat-bar.hidden {
+    display: none;
+}
+.origin-line {
+    position: absolute;
+    width: 2px; /* Width of the vertical line */
+    height: 10px; /* Height equal to the bar chart height */
+    background-color: #fff; /* Color of the vertical line */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+
+/* ------- Footer ------- */
+
+footer {
+    width: calc(100% - 100px); /* -4*25px pour les padding et margin */
+    margin: 25px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid grey;
+    background: #333;
+    color: #fff;
+}

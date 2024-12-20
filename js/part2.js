@@ -8,44 +8,44 @@ c2 = {
     awayPlayers: [],
     // Metrics to be proposed in the left list menu
     metrics: [
-        {name: "general-minutes_played", text: "Playing Time"},
-        {name: "general-goals_scored", text: "Goals"},
-        {name: "general-cards-yellow", text: "Yellow Cards"},
-        {name: "general-cards-red", text: "Red Cards"},
-        {name: "general-shots-total", text: "Total Shots"},
-        {name: "general-shots-left_foot", text: "Left Foot Shots"},
-        {name: "general-shots-right_foot", text: "Right Foot Shots"},
-        {name: "general-shots-head", text: "Head Shots"},
         {name: "general-balls_touched", text: "Balls Touched"},
         {name: "general-distance_ran_with_ball", text: "Distance with Ball"},
         {name: "general-time_with_ball", text: "Time with Ball"},
-        {name: "defense-tackles_successful", text: "Tackles Completed"},
-        {name: "defense-tackles_missed", text: "Tackles Missed"},
         {name: "defense-interceptions", text: "Interceptions"},
-        {name: "defense-aerials_won", text: "Aerials Won"},
-        {name: "defense-aerials_loss", text: "Aerials Lost"},
-        {name: "defense-faults", text: "Faults"},
-        {name: "defense-dribbles_suffered", text: "Dribbles Suffered"},
-        {name: "defense-own_goals", text: "Own Goals"},
-        {name: "attack-faults_won", text: "Faults Provoked"},
-        {name: "attack-dribbles_successful", text: "Dribbles Won"},
-        {name: "attack-dribbles_missed", text: "Dribbles Lost"},
-        {name: "attack-offsides", text: "Offsides"},
+        {name: "general-shots-total", text: "Total Shots"},
+        {name: "passing-assists", text: "Assists"},
+        {name: "passing-key_passes", text: "Key Passes"},
         {name: "attack-xG", text: "xG"},
         {name: "attack-xG_diff", text: "xG Difference"},
         {name: "attack-xG_per_shot", text: "xG per Shot"},
-        {name: "passing-assists", text: "Assists"},
-        {name: "passing-key_passes", text: "Key Passes"},
+        {name: "general-goals_scored", text: "Goals"},
+        {name: "passing-avg_pass_length", text: "Average Pass Length"},
+        {name: "goalkeeper-shots_saved", text: "Saved Shots"},
         {name: "passing-passes_successful", text: "Completed Passes"},
         {name: "passing-passes_missed", text: "Missed Passes"},
-        {name: "passing-avg_pass_length", text: "Average Pass Length"},
+        {name: "general-shots-left_foot", text: "Left Foot Shots"},
+        {name: "general-shots-right_foot", text: "Right Foot Shots"},
+        {name: "general-shots-head", text: "Head Shots"},
+        {name: "defense-own_goals", text: "Own Goals"},
+        {name: "defense-tackles_successful", text: "Tackles Completed"},
+        {name: "defense-tackles_missed", text: "Tackles Missed"},
+        {name: "defense-aerials_won", text: "Aerials Won"},
+        {name: "defense-aerials_loss", text: "Aerials Lost"},
+        {name: "attack-faults_won", text: "Faults Provoked"},
+        {name: "defense-dribbles_suffered", text: "Dribbles Suffered"},
+        {name: "attack-dribbles_successful", text: "Dribbles Won"},
+        {name: "attack-dribbles_missed", text: "Dribbles Lost"},
+        {name: "attack-offsides", text: "Offsides"},
+        {name: "defense-faults", text: "Faults"},
         {name: "passing-ball_loss", text: "Ball Losses"},
         {name: "goalkeeper-goals_conceded", text: "Goals Conceded"},
         {name: "goalkeeper-penalty_conceded", text: "Conceded Penalties"},
         {name: "goalkeeper-penalty_saved", text: "Saved Penalties"},
-        {name: "goalkeeper-shots_saved", text: "Saved Shots"},
         {name: "goalkeeper-digs_successful", text: "Successful Digs"},
         {name: "goalkeeper-punch", text: "Punches"},
+        {name: "general-minutes_played", text: "Playing Time"},
+        {name: "general-cards-yellow", text: "Yellow Cards"},
+        {name: "general-cards-red", text: "Red Cards"},
     ],
     // Number of players displayed in the chart
     n: 10,
@@ -91,7 +91,7 @@ function displayBarChart(topN, path) {
     c2.chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
     c2.chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
 
-    c2.xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, c2.chartWidth]).align(0);
+    c2.xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, c2.chartWidth]).padding(0);
     let minVal;
     ext[0] < 0 ? minVal = ext[0] : minVal = 0; // Sera utile quand j'aurais trouvé comment bien représenter la xG_diff
     c2.yScale = d3.scaleLinear().domain([minVal, ext[1]]).range([c2.chartHeight, 0]);
@@ -128,14 +128,15 @@ function displayBarChart(topN, path) {
         .attr("transform", (d, i)=> `translate(${(i+1/3)*xSpacing}, ${c2.yScale(getPropertyValue(d, path))})`);
         
     barGroups.append('rect')
-        .attr("width", c2.xScale.bandwidth() - 20)
-        .attr("fill", d => d.team.home ? "red" : "blue") // red color for home team, blue color for away team
+        .attr("width", c2.xScale.bandwidth() - 20) // adapt this to c2.n
+        .attr("fill", d => d.team.home ? "#AA0000" : "#0000AA") // red color for home team, blue color for away team
         .transition()
         .duration(1000)
         .attr("height", d => c2.chartHeight - c2.yScale(getPropertyValue(d, path)))
         .transition()
-        .duration(1000)
-        .append("title").text(d => `Name : ${d.name} \nTeam : ${d.team.name} \nJersey n° : ${d.jersey_number} \nPlays ${d.position}`);
+        .duration(1000);
+    barGroups.append("title")
+        .text(d => `Name : ${d.name} \nTeam : ${d.team.name} \nJersey n° : ${d.jersey_number} \nPlays ${d.position}`);
 }
 
 
