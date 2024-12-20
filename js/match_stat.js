@@ -20,21 +20,6 @@ const matchExample = {
             { scorer: "F. Valverde", minute: 39 }
         ]
     },
-    status: "FT",
-    week: "Week 17 - La Liga",
-    league: "La Liga",
-    venue: "Estadio de Vallecas, Madrid",
-    stats: {  // Assuming some example stats here
-        "Shots on goal": { "Vallecano": 5, "Real Madrid": 6 },
-        "Shots": { "Vallecano": 11, "Real Madrid": 12 },
-        "Possession %": { "Vallecano": 38, "Real Madrid": 62 },
-        "Fouls": { "Vallecano": 15, "Real Madrid": 9 },
-        "Yellow cards": { "Vallecano": 4, "Real Madrid": 2 },
-        "Red cards": { "Vallecano": 0, "Real Madrid": 0 },
-        "Offsides": { "Vallecano": 0, "Real Madrid": 1 },
-        "Corner kicks": { "Vallecano": 4, "Real Madrid": 3 },
-        "Saves": { "Vallecano": 3, "Real Madrid": 2 }
-    }
 };
 
 function updateMatchCard(matchData) {
