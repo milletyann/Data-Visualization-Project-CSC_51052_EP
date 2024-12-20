@@ -11,13 +11,15 @@ function initPage() {
     // add here the creation of SVG elements
     // initial SVG elements creations for PART 1
     // initial SVG elements creations for PART 2
-    let part2svgEl = d3.select("#svg-container-part2").append("svg");
-    part2svgEl.attr("width", c2.WIDTH);
-    part2svgEl.attr("height", c2.HEIGHT);
-    initializeButtons();
+    let part2svgEl = d3.select("#svg-container-part2").append("svg").attr("id", "svgPart2");
+    part2svgEl.attr("width", c2.svgWIDTH);
+    part2svgEl.attr("height", c2.svgHEIGHT);
     
     // initial SVG elements creations for PART 3
+
+
     loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
+    populateMetricsList();
     updateGameChosen();
 };
 
@@ -147,7 +149,6 @@ function updateTeamChosen() {
             );
         };
     });
-    // DOUBLONS ICI: LES MATCHES SONT EN DOUBLES DANS LE SELECT DE GAME
     ctx.games.forEach(element => {
         const opt = document.createElement('option');
         opt.value = element.gameID;
@@ -156,7 +157,7 @@ function updateTeamChosen() {
     });
 };
 
-// called when the fourth select of the form is modified (ignores if First, Second and Third select are not valid)
+// called when the fourth select of the form is modified
 function updateGameChosen() {
     let i = gameChoice.game.value;
     //let i = 3943077; // TO DELETE !! JUST IN DEVELOPMENT
@@ -173,10 +174,9 @@ function updateGameChosen() {
     console.log("Home Team Name:", ctx.homeTeamId_name, "Away Team Name:", ctx.awayTeamId_name);
 
     ctx.currentGameID = i;
-    console.log("event file: ", "../data/events/" + i + ".json");
     d3.json("../data/events/" + i + ".json").then(function(data) {
-        console.log("Game file " + i + ".json is loaded");
         ctx.gameData = data;
+        console.log("Game file " + i + ".json is loaded");
         // simple load so everyone can access this in its own js file and treat it like he wants
         createViz();
     });

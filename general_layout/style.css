@@ -10,7 +10,16 @@ svg {
     padding: 0;
     border: 0;
     margin: 0;
+    overflow-x: hidden;
 
+    /* Hide scrollbar on different browsers */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.smoothFading {
+    visibility: hidden;
+    transition: visibility 0.4s ease;
 }
 
 body {
@@ -21,9 +30,7 @@ body {
 }
 
 #landing {
-    border: 1px solid green;
-    width: calc(100% - 2px); /* Use calc for better readability */
-    width: 100%;
+    width: calc(100% -20px);
     height: 100px;
     background: #333;
     padding: 10px;
@@ -49,8 +56,7 @@ body {
 /* All sections */
 .section {
     position: relative;
-    width: calc(100% - 2px); /* Use calc for better readability */
-    min-height: 150px; /* to delete when section are filled */
+    width: calc(100% - 20px); /* -2*10px de padding */
     padding: 10px;
     background: #444;
     margin-bottom: 10px;
@@ -73,62 +79,79 @@ body {
     margin: 20px;
 }
 
-.toggle-button {
-    margin: 0 10px;
-    padding: 20px 30px;
-    font-size: 16px;
-    cursor: pointer;
-    background: rgb(126, 126, 126);
-    border: 2px solid rgb(85, 85, 85);
-    border-radius: 4px;
-    transition: background 0.4s ease;
-    width: 300px;
-
-}
-
-#controls-part2 .selected {
-    background: rgb(60, 60, 60);
-    color: white;
-    border-color: #477cad;
-}
-
 #content-part2 {
     margin: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
     padding: 20px;
 }
 
-#content-part2 h3 {
-    border: 1px solid rgb(218, 214, 214);
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-}
 
 #content-part2 li {
     padding: 10px;
     margin: 5px;
 }
 
-#list-left, #list-right {
-    border: 1px solid whitesmoke;
+#list-left {
+    position: relative;
+    border: 1px solid rgba(245, 245, 245, 0.554);
+    border-radius: 5px;
+    max-height: 400px;
+    flex: 1;
 }
 
-#list-left .player-name, #list-right .player-name {
-    margin: 5px;
+
+
+#list-left h3 {
+    border: 1px solid rgb(218, 214, 214);
+    border-radius: 5px;
+    margin: 10px;
     padding: 10px;
+    text-align: center;
+}
+
+#list-left .metrics {
+    margin: 2px;
+    padding: 7px;
     background: rgb(75, 75, 235);
     list-style: none;
 }
 
+#list-left ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
+#list-left ul li {
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ddd;
+    margin: 5px 0;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
 
-/* ------- Section 3 ------- */
-#teamsViz {
-    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+#list-left ul li:hover {
+    background-color: #bbb;
+}
+
+#svg-container-part2 {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------- Section 3 Yong ------- */
+
+#teamViz {
+    background-color: white;
 }
 
 .navbar {
@@ -158,7 +181,8 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background: #555;
+    background: rgb(174, 171, 171);
+
 }
 
 .stat-row-team-names {
@@ -172,7 +196,8 @@ body {
 .team-name {
     height: 30px;
     font-size: 1.2em;
-    color: #fff;
+    color: black;
+    
 }
 
 .stat-row {
@@ -195,14 +220,14 @@ body {
     flex-grow: 1;
     text-align: center;
     font-size: 1.1em;
-    color: #fff;
+    color: black;
 }
 
 .stat-value {
     width: 100px;
     text-align: center;
     font-size: 1.1em;
-    color: #fff;
+    color: black;
 }
 
 .stat-value.home {
@@ -261,23 +286,14 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
-#lineups {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust the height as needed */
-}
 
-#lineups svg {
-    max-width: 100%;
-    max-height: 100%;
-}
+
 
 
 /* ------- Footer ------- */
 
 footer {
-    width: calc(100% - 2px);
+    width: calc(100% - 100px); /* -4*25px pour les padding et margin */
     margin: 25px;
     padding: 25px;
     text-align: center;
