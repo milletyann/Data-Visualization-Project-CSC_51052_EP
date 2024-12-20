@@ -1,3 +1,4 @@
+
 function hideAllSections() {
     document.querySelectorAll('.content-section').forEach(section => {
         section.style.display = 'none';
@@ -192,168 +193,19 @@ function findSubstitution(events, homeTeamId, awayTeamId) {
             const playerOut = event.player.id;
             const playerInName = event.substitution.replacement.name;
             const playerOutName = event.player.name;
+            const playerOut_number = event.player.jersey_number;
             const time = event.timestamp;
-            substitutions[teamKey].push({ playerIn, playerOut, playerInName, playerOutName, time });
+            substitutions[teamKey].push({ playerIn, playerOut, playerInName, playerOutName, playerOut_number, time });
         }
     });
 
     return substitutions;
 }
 
-function DrawLineUp(Pitch, H, W){
-    const svg = Pitch.append("div").attr("class", "football-pitch");
-    const pitch = svg.append("svg")
-        .attr("width", W)
-        .attr("height", H);
-    
-    // Pitch Outline
-    pitch.append("rect")
-        .attr("x", 10)
-        .attr("y", 10)
-        .attr("width", W - 20)
-        .attr("height", H - 20)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-
-    // Halfway line
-    pitch.append("line")
-        .attr("x1", 10)
-        .attr("y1", H / 2)
-        .attr("x2", W - 10)
-        .attr("y2", H / 2)
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-    // Centre circle
-    pitch.append("circle")
-        .attr("cx", W / 2)
-        .attr("cy", H / 2)
-        .attr("r", 50)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-    
-    // Home penalty box
-    pitch.append("rect")
-        .attr("x", W/2 - 0.2*W)
-        .attr("y", 10)
-        .attr("width", 0.4*W)
-        .attr("height", 0.1*H)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-    // Home goal box
-    pitch.append("rect")
-        .attr("x", W/2 - 0.1*W)
-        .attr("y", 10)
-        .attr("width", 0.2*W)
-        .attr("height", 0.04*H)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-        
-    // Away penalty box
-    pitch.append("rect")
-        .attr("x", W/2 - 0.2*W)
-        .attr("y", H - 0.1*H - 10)
-        .attr("width", 0.4*W)
-        .attr("height", 0.1*H)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-    // Away goal box
-    pitch.append("rect")
-        .attr("x", W/2 - 0.1*W)
-        .attr("y", H - 0.04*H - 10)
-        .attr("width", 0.2*W)
-        .attr("height", 0.04*H)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-}
-
-function Player_Position(pitch,players, H, W){
-    console.log("Drawing players on the pitch");
-    console.log("11 players: ", players);
-    position_play = {
-        home : {
-            "Goalkeeper" : [W/2, 0.1*H],
-            "Right Back" : [W/2 + 0.2*W, 0.2*H],
-            "Right Center Back" : [W/2 + 0.1*W, 0.3*H],
-            "Left Center Back" : [W/2 - 0.1*W, 0.3*H],
-            "Left Back" : [W/2 - 0.2*W, 0.2*H],
-            "Center Defensive Midfield" : [W/2, 0.4*H],
-            "Right Center Midfield" : [W/2 + 0.1*W, 0.4*H],
-            "Right Defensive Midfield" : [W/2 + 0.3*W, 0.4*H],
-            "Left Defensive Midfield" : [W/2 - 0.3*W, 0.4*H],
-            "Right Wing" : [W/2 + 0.4*W, 0.5*H],
-            "Centre Attacking Midfield" : [W/2, 0.5*H],
-            "Left Wing" : [W/2 - 0.4*W, 0.5*H],
-            "Center Forward" : [W/2, 0.6*H],
-            "Right Midfield" : [W/2 + 0.3*W, 0.5*H],
-            "Left Center Midfield" : [W/2 - 0.3*W, 0.5*H],
-            "Right Center Forward" : [W/2 + 0.1*W, 0.6*H]
-
-        },
-        away : {
-            "Goalkeeper" : [W/2, 0.9*H],
-            "Right Back" : [W/2 + 0.2*W, 0.8*H],
-            "Right Center Back" : [W/2 + 0.1*W, 0.7*H],
-            "Left Center Back" : [W/2 - 0.1*W, 0.7*H],
-            "Left Back" : [W/2 - 0.2*W, 0.8*H],
-            "Center Defensive Midfield" : [W/2, 0.6*H],
-            "Right Center Midfield" : [W/2 + 0.1*W, 0.6*H],
-            "Right Defensive Midfield" : [W/2 + 0.3*W, 0.6*H],
-            "Left Defensive Midfield" : [W/2 - 0.3*W, 0.6*H],
-            "Right Wing" : [W/2 + 0.4*W, 0.5*H],
-            "Centre Attacking Midfield" : [W/2, 0.5*H],
-            "Left Wing" : [W/2 - 0.4*W, 0.5*H],
-            "Center Forward" : [W/2, 0.4*H],
-            "Right Midfield" : [W/2 + 0.3*W, 0.5*H],
-            "Left Center Midfield" : [W/2 - 0.3*W, 0.5*H],
-            "Right Center Forward" : [W/2 + 0.1*W, 0.4*H]
-        }
-    }
-    // Function to draw players on the pitch
-    function drawPlayers(teamKey, players) {
-        players.forEach(player => {
-            const pos = position_play[teamKey][player.position];
-            console.log("Player position: ", pos);
-            if (pos) {
-                pitch.append("circle")
-                    .attr("cx", pos[0])
-                    .attr("cy", pos[1])
-                    .attr("r", 10)
-                    .attr("fill", teamKey === "home" ? "blue" : "red")
-                    .attr("stroke", "white")
-                    .attr("stroke-width", 2);
-
-                // Adding player number or name
-                pitch.append("text")
-                    .attr("x", pos[0])
-                    .attr("y", pos[1] + 4)  // Adjust to center the text vertically relative to the circle
-                    .attr("text-anchor", "middle")
-                    .text(player.number)
-                    .attr("fill", "white")
-                    .style("font-size", "12px")
-                    .style("font-weight", "bold");
-            }
-        });
-    }
-
-    // Draw home and away players
-    drawPlayers("home", players.home);
-    drawPlayers("away", players.away);
-
-} 
-
-
-// Function to display lineups
 function displayLineups() {
     // set the active button
     setActiveButton('lineups-btn');
     displaySection('lineups');
-    // TODO
     // Extract the players from the events
     const players = GetPlayer(ctx.gameData, ctx.homeTeamId, ctx.awayTeamId);
     console.log("Players: ", players);
@@ -364,23 +216,88 @@ function displayLineups() {
     // Display the lineups
     const container = d3.select("#lineups");
     container.html('');  // Clear previous contents
-    const H = 1000;
-    const W = 600;
-    const Pitch = d3.select("#lineups").append("div").attr("class", "football-pitch");
-    //Fillter only the first 11 players not in the substitution list
-    const players_home = players.home.filter(player => !substitutions.home.find(sub => sub.playerIn === player.id));
-    const players_away = players.away.filter(player => !substitutions.away.find(sub => sub.playerIn === player.id));
-    // Combine the home and away players
-    const players_new = { home: players_home, away: players_away };
 
-    DrawLineUp(Pitch, H, W);
-    Player_Position(Pitch, players_new, H, W);
-    
+    // Create a structured text layout for the lineups
+    const lineupContainer = container.append("div").attr("class", "lineup-container");
+
+    // Add the player In jersey number to the substitution object
+    substitutions.home.forEach(sub => {
+        const player = players.home.find(p => p.id === sub.playerIn);
+        if (player) {
+            sub.playerIn_number = player.number;
+        }
+    });
+
+    substitutions.away.forEach(sub => {
+        const player = players.away.find(p => p.id === sub.playerIn);
+        if (player) {
+            sub.playerIn_number = player.number;
+        }
+    });
+
+    // Filter the players that played before substitutions
+    players.home = players.home.filter(player => !substitutions.home.find(sub => sub.playerOut === player.id));
+    players.away = players.away.filter(player => !substitutions.away.find(sub => sub.playerOut === player.id));
+
+    console.log("Players before substitutions: ", players);
+
+    // Function to create a section for a team
+    function createTeamSection(teamKey, teamName, players, substitutions) {
+        const teamSection = lineupContainer.append("div").attr("class", "team-section");
+        teamSection.append("h2").text(teamName);
+
+        // Goalkeeper
+        const goalkeeper = players.find(player => player.position === "Goalkeeper");
+        if (goalkeeper) {
+            teamSection.append("div").attr("class", "position-section").html(`
+                <strong>Goalkeeper</strong><br>
+                ${goalkeeper.name} #${goalkeeper.number}
+            `);
+        }
+
+        // Defenders
+        const defenders = players.filter(player => ["Right Back", "Right Center Back", "Left Center Back", "Left Back", "Right Wing", "Left Wing"].includes(player.position));
+        if (defenders.length > 0) {
+            teamSection.append("div").attr("class", "position-section").html(`
+                <strong>Defenders</strong><br>
+                ${defenders.map(player => `${player.name} #${player.number}`).join('<br>')}
+            `);
+        }
+
+        // Midfielders
+        const midfielders = players.filter(player => ["Center Defensive Midfield", "Right Center Midfield", "Left Center Midfield", "Right Defensive Midfield", "Left Defensive Midfield", "Right Wing", "Centre Attacking Midfield", "Left Wing", "Right Midfield"].includes(player.position));
+        if (midfielders.length > 0) {
+            teamSection.append("div").attr("class", "position-section").html(`
+                <strong>Midfielders</strong><br>
+                ${midfielders.map(player => `${player.name} #${player.number}`).join('<br>')}
+            `);
+        }
+
+        // Forwards
+        const forwards = players.filter(player => ["Center Forward", "Right Center Forward"].includes(player.position));
+        if (forwards.length > 0) {
+            teamSection.append("div").attr("class", "position-section").html(`
+                <strong>Forwards</strong><br>
+                ${forwards.map(player => `${player.name} #${player.number}`).join('<br>')}
+            `);
+        }
+
+        // Substitutes
+        if (substitutions.length > 0) {
+            teamSection.append("div").attr("class", "position-section").html(`
+                <strong>Substitutes</strong><br>
+                ${substitutions.map(sub => `${sub.playerInName} #${sub.playerIn_number}`).join('<br>')}
+            `);
+        }
+    }
+
+    // Create sections for home and away teams
+    createTeamSection("home", ctx.homeTeamId_name, players.home, substitutions.home);
+    createTeamSection("away", ctx.awayTeamId_name, players.away, substitutions.away);
 }
 
 // Add event listener for the button click
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('match-stats-btn').addEventListener('click', handleMatchStatsClick);
-    //document.getElementById('lineups-btn').addEventListener('click', displayLineups);
+    document.getElementById('lineups-btn').addEventListener('click', displayLineups);
 });
-

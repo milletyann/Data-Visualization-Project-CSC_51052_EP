@@ -53,7 +53,7 @@ body {
     position: relative;
     width: calc(100% - 20px); /* -2*10px de padding */
     padding: 10px;
-    background: #444;
+    /* background: #444; */
     margin-bottom: 10px;
 }
 
@@ -183,9 +183,7 @@ body {
 
 /* ------- Section 3 ------- */
 
-#teamViz {
-    background-color: white;
-}
+
 
 .navbar {
     display: flex;
@@ -325,8 +323,32 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
+/*-----line up section-----*/
+#lineup {
+    background: rgb(244, 239, 239); 
+    color: black;
+    display: none;
+    padding: 20px;
+}
+.lineup-container {
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.team-section{
+    padding-top: 20px;
+    padding-left: 30px;
+    background-color: white;
+    color: black;
+}
 
-
+.position-section {
+    margin-bottom: 30px;
+    background-color: #f9f9f9 ;
+    padding: 5px;
+    border-radius: 5px;
+}
 
 
 /* ------- Footer ------- */
