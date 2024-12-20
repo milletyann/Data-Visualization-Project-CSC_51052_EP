@@ -129,8 +129,12 @@ function displayBarChart(topN, path) {
         
     barGroups.append('rect')
         .attr("width", c2.xScale.bandwidth() - 20)
+        .attr("fill", d => d.team.home ? "red" : "blue") // red color for home team, blue color for away team
+        .transition()
+        .duration(1000)
         .attr("height", d => c2.chartHeight - c2.yScale(getPropertyValue(d, path)))
-        .attr("fill", "red")
+        .transition()
+        .duration(1000)
         .append("title").text(d => `Name : ${d.name} \nTeam : ${d.team.name} \nJersey n° : ${d.jersey_number} \nPlays ${d.position}`);
 }
 
@@ -163,6 +167,7 @@ function extractPlayers(game_id, teamName, home) {
                 element.tactics.lineup.forEach(el => {
                     j = el.player;
                     j.team = element.team;
+                    j.team.home = home;
                     j.enters_at = [element.minute, element.second];
                     j.subbed = null;
                     j.titu = true;

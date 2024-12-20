@@ -20,7 +20,7 @@ function initPage() {
 
     loadCompetitions(); // TO PUT BACK UNCOMMENTED!! JUST IN DEVELOPMENT
     populateMetricsList();
-    updateGameChosen();
+    updateGameChosen(); // TO DELETE AFTER DEVELOPMENT
 };
 
 function createViz() {
