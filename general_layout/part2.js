@@ -1,7 +1,7 @@
 c2 = {
     // part2 svg size
     svgHEIGHT: 400,
-    svgWIDTH: 800,
+    svgWIDTH: 680,
     margin: { top: 20, right: 20, bottom: 30, left: 50 },
     // players lists
     homePlayers: [],
@@ -48,13 +48,14 @@ c2 = {
         {name: "goalkeeper-punch", text: "Punches"},
     ],
     // Number of players displayed in the chart
-    n: 5,
+    n: 10,
 };
 
 function vizPart2() {
     // List all players that played
     c2.homePlayers = extractPlayers(ctx.currentGameID, ctx.gameData[0].team.name, true);
     c2.awayPlayers = extractPlayers(ctx.currentGameID, ctx.gameData[1].team.name, false);
+    console.log(c2.homePlayers);
 
     populateMetricsList();
     iterateEvents();
@@ -66,7 +67,7 @@ function populateMetricsList() {
     const leftList = document.getElementById("list-left");
 
     while (leftList.firstChild) {
-      leftList.removeChild(leftList.firstChild);
+        leftList.removeChild(leftList.firstChild);
     };
 
     const h3 = document.createElement("h3");
@@ -76,46 +77,61 @@ function populateMetricsList() {
     leftList.appendChild(ul);
 
     c2.metrics.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item.text;
-      li.addEventListener("click", () => handleListItemClick(item.name));
-      ul.appendChild(li);
+        const li = document.createElement("li");
+        li.textContent = item.text;
+        li.addEventListener("click", () => handleListItemClick(item.name));
+        ul.appendChild(li);
     });
 }
 
 /* ------- Populating SVG ------- */
 
 function displayBarChart(topN, path) {
-    const maxVal = d3.max(topN, o => getPropertyValue(o, path));
-    const chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
-    const chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
+    const ext = d3.extent(topN, o => getPropertyValue(o, path));
+    c2.chartWidth = c2.svgWIDTH - c2.margin.left - c2.margin.right;
+    c2.chartHeight = c2.svgHEIGHT - c2.margin.top - c2.margin.bottom;
 
-    const xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, chartWidth]).padding(0.1);
-    const yScale = d3.scaleLinear().domain([0, maxVal]).range([chartHeight, 0]);
+    c2.xScale = d3.scaleBand().domain(topN.map(d => d.name)).range([0, c2.chartWidth]).align(0);
+    let minVal;
+    ext[0] < 0 ? minVal = ext[0] : minVal = 0; // Sera utile quand j'aurais trouvé comment bien représenter la xG_diff
+    c2.yScale = d3.scaleLinear().domain([minVal, ext[1]]).range([c2.chartHeight, 0]);
 
     const svgContainer = d3.select("#svgPart2");
+    svgContainer.selectAll("*").remove();
+
+    const lc = svgContainer.lastElementChild;
+    while (lc) {
+        svgContainer.removeChild(lc);
+        lc = svgContainer.lastElementChild
+    };
 
     const mainG = svgContainer.append("g")
         .attr("transform", `translate(${c2.margin.left},${c2.margin.top})`)
         .attr("id", "mainG");
 
     mainG.append("g")
-        .call(d3.axisLeft(yScale))
+        .call(d3.axisLeft(c2.yScale))
         .attr("class", "y-axis");
 
+    mainG.append("g")
+        .attr("transform", `translate(0,${c2.chartHeight})`)
+        .call(d3.axisBottom(c2.xScale))
+        .attr("class", "x-axis");
+
+    const xSpacing = c2.xScale.bandwidth();
     const barGroups = mainG.selectAll(".bar-group")
         .data(topN)
         .enter()
         .append("g")
         .attr("class", "bar-group")
-        .attr("transform", d => `translate(${xScale(d.name)}, 0)`);
-
-    barGroups.append("rect")
-        .attr("x", d => xScale(d.name)) // NaN
-        .attr("y", d => yScale(getPropertyValue(d, path))) // NaN
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => chartHeight - yScale(getPropertyValue(d, path)))
-        .attr("fill", "red");
+        .attr("y", d => c2.xScale(getPropertyValue(d, path)))
+        .attr("transform", (d, i)=> `translate(${(i+1/3)*xSpacing}, ${c2.yScale(getPropertyValue(d, path))})`);
+        
+    barGroups.append('rect')
+        .attr("width", c2.xScale.bandwidth() - 20)
+        .attr("height", d => c2.chartHeight - c2.yScale(getPropertyValue(d, path)))
+        .attr("fill", "red")
+        .append("title").text(d => `Name : ${d.name} \nTeam : ${d.team.name} \nJersey n° : ${d.jersey_number} \nPlays ${d.position}`);
 }
 
 
@@ -133,6 +149,7 @@ function handleListItemClick(item_name) {
     });
 
     topN = combine.slice(0,c2.n);
+
     displayBarChart(topN, path);
 }
 
@@ -149,6 +166,8 @@ function extractPlayers(game_id, teamName, home) {
                     j.enters_at = [element.minute, element.second];
                     j.subbed = null;
                     j.titu = true;
+                    j.jersey_number = el.jersey_number;
+                    j.position = el.position.name;
                     players.push(j);
                 });
 
@@ -158,6 +177,8 @@ function extractPlayers(game_id, teamName, home) {
                 j.enters_at = [element.minute, element.second];
                 j.subbed = null;
                 j.titu = false;
+                j.jersey_number = element.jersey_number;
+                j.position = element.position.name;
                 players.push(j);
 
                 // subbed player info update

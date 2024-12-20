@@ -17,11 +17,6 @@ svg {
     scrollbar-width: none;
 }
 
-.smoothFading {
-    visibility: hidden;
-    transition: visibility 0.4s ease;
-}
-
 body {
     position: absolute;
     width: 100%;
@@ -64,12 +59,12 @@ body {
 
 /* ------- Section 1 ------- */
 #gameViz {
-    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
 }
 
 /* ------- Section 2 ------- */
 #playersViz {
-    border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
 }
 
 
@@ -101,8 +96,6 @@ body {
     max-height: 400px;
     flex: 1;
 }
-
-
 
 #list-left h3 {
     border: 1px solid rgb(218, 214, 214);
@@ -148,7 +141,47 @@ body {
     align-items: center;
 }
 
-/* ------- Section 3 Yong ------- */
+/* tooltip test */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ------- Section 3 ------- */
 
 #teamViz {
     background-color: white;
@@ -170,6 +203,9 @@ body {
     color: rgb(28, 6, 60);
     transition: background-color 0.3s;
     cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1em;	
+    font-weight: bold;	
 }
 
 .navbar button:hover, .navbar button.active {
@@ -177,11 +213,11 @@ body {
 }
 
 #match-stats {
-    width: 100%;
+    width: 100% - 20px;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background: rgb(174, 171, 171);
+    background: white;
 
 }
 
@@ -195,8 +231,9 @@ body {
 
 .team-name {
     height: 30px;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: black;
+    font-weight: bold;
     
 }
 
@@ -221,6 +258,7 @@ body {
     text-align: center;
     font-size: 1.1em;
     color: black;
+    font-weight: bold;
 }
 
 .stat-value {
@@ -228,6 +266,7 @@ body {
     text-align: center;
     font-size: 1.1em;
     color: black;
+    font-weight: bold;
 }
 
 .stat-value.home {
@@ -247,7 +286,7 @@ body {
     width: 75%;
     position: relative;
     height: 10px; /* Increase the height for better visibility */
-    background-color: #dad5d5; /* Optional: background to enhance visibility */
+    background-color: #9f9b9b; /* Optional: background to enhance visibility */
     border-radius: 5px;
     margin-bottom: 10px;
 }

@@ -11,13 +11,16 @@
     <script>
         const custom_d3_soccer = d3; // Alias for our modified d3-soccer library
     </script>
-    <!-- Section 2 js code (player stats) -->
     <script type="text/javascript" src="match_stat.js"></script>
     <script type="text/javascript" src="globalcode.js"></script>
     <script type="text/javascript" src="part2.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initPage()">
+    <!-- Gloire's part -->
+    <section id="gameViz" class="section">
+        <iframe id="matchVizFrame" src="../match_viz.html" style="width: 100%; height: 600px; border: none;"></iframe>
+    </section>
     <section id="landing">
         <div class="title"></div>
         <div class="menu">
@@ -37,17 +40,17 @@
             </form>
         </div>
     </section>
-    <!-- Gloire's part -->
-    <section id="gameViz" class="section"></section>
     <!-- Yann's part -->
     <section id="playersViz" class="section">
+        <div class="tooltip">Hover over me
+            <span class="tooltiptext">Tooltip text</span>
+        </div>
         
         <div id="content-part2">
             <div id="list-left">
                 <h3>Metrics</h3>
             </div>
-            <div id="svg-container-part2">
-            </div>
+            <div id="svg-container-part2"></div>
         </div>
     </section>
     <!-- Yong's part -->

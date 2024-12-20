@@ -1,19 +1,23 @@
+const matchConfigs = {} // Object to store match configurations
 // Global configuration object
 const config = {
-    headerHeight: 100, updateInterval: 50, // milliseconds between frame updates
+    headerHeight: 100,
+    updateInterval: 50, // milliseconds between frame updates
     teams: {
         home: {
-            name: "Liverpool",
-            score: 2,
-            logo: "https://upload.wikimedia.org/wikipedia/fr/thumb/5/54/Logo_FC_Liverpool.svg/langfr-130px-Logo_FC_Liverpool.svg.png"
-        }, away: {
-            name: "Fulham",
-            score: 0,
-            logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"
+            name: "",
+            score: NaN,
+            logo: ""
+        },
+        away: {
+            name: "",
+            score: NaN,
+            logo: ""
         }
     }
 };
 
+let pitchHeight;
 
 // D3 scales for converting between meters and pixels
 const scales = {
@@ -22,7 +26,7 @@ const scales = {
         .range([0, 105]),  // field dimensions in pixels
     y: d3.scaleLinear()
         .domain([0, 100])
-        .range([0, 68])
+        .range([68, 0])
 };
 
 // Main visualization class
@@ -32,12 +36,27 @@ class SoccerVisualization {
         this.data = null;
         this.currentFrame = -1;
         this.animationInterval = null;
+        this.currentMatch = null;
     }
 
-    async initialize() {
+    async initialize(matchId) {
+        // Stopping any existing animation
+        this.stopAnimation();
+
+        // Clearing existing visualization
+        this.container.html('');
+
+        // Setting current match
+        this.currentMatch = matchConfigs[matchId];
+
+        // Updating global config
+        Object.assign(config.teams, this.currentMatch.config.teams);
+
         await this.loadData();
 
         this.createViz();
+
+        this.currentFrame = -1;
 
         this.startAnimation();
     }
@@ -45,9 +64,13 @@ class SoccerVisualization {
     async loadData() {
         try {
             // Loading the CSV file
-            this.data = await d3.csv('data/liverpool_2019.csv');
-            // Filtering for specific match
-            this.data = this.data.filter(d => d.play == "Liverpool [2] - 0 Man City");
+            this.data = await d3.csv(`data/matches_to_visualize/${this.currentMatch.file}`);
+
+            // Applying filter if exists
+            if (this.currentMatch.filter) {
+                this.data = this.data.filter(d => d.play === this.currentMatch.filter);
+            }
+
             this.maxFrame = d3.max(this.data, d => parseInt(d.frame));
         } catch (error) {
             console.error('Error loading data:', error);
@@ -57,6 +80,7 @@ class SoccerVisualization {
     createViz() {
         const pitch = custom_d3_soccer.pitch()
         const pitchWidth = pitch.width();
+        pitchHeight = pitch.height();
         const totalHeight = config.headerHeight + pitch.height();
 
         // Creating main SVG
@@ -77,7 +101,7 @@ class SoccerVisualization {
 
     createHeader(pitchWidth) {
         const header = custom_d3_soccer.matchHeader()
-            .hed("Premier League")
+            .hed("")
             .score([config.teams.home.score, config.teams.away.score])
             .logoHome(config.teams.home.logo)
             .logoAway(config.teams.away.logo);
@@ -166,41 +190,92 @@ class SoccerVisualization {
     }
 }
 
-function main() {
+async function main() {
     const loadingDiv = document.getElementById('loading');
-    const errorDiv = document.getElementById('error');
+    const matchSelect = document.getElementById('matchSelect');
+    let viz = null;
+
+    // Initially showing loading indicator while we fetch matches
+    loadingDiv.style.display = 'block';
 
     try {
-        // Initializing visualization
-        const viz = new SoccerVisualization('#visualization');
-        viz.initialize().then(() => {
-            loadingDiv.style.display = 'none'; // Hiding loading indicator
+        // Loading match configurations from JSON file
+        const response = await fetch('data/matches_to_visualize/match_configs.json');
+        const matchesData = await response.json();
 
-            // Setting up controls
-            const playPauseBtn = document.getElementById('playPause');
-            const resetBtn = document.getElementById('reset');
+        // Populating matchConfigs object with the loaded data
+        Object.assign(matchConfigs, matchesData);
 
-            let isPlaying = true;
+        // Clearing and populating the select element
+        matchSelect.innerHTML = '<option value="">Select a match to visualize</option>';
 
-            playPauseBtn.addEventListener('click', () => {
-                if (isPlaying) {
-                    viz.stopAnimation();
-                    playPauseBtn.textContent = 'Play';
-                } else {
-                    viz.startAnimation();
-                    playPauseBtn.textContent = 'Pause';
-                }
-                isPlaying = !isPlaying;
-            });
-
-            resetBtn.addEventListener('click', () => {
-                viz.currentFrame = 0;
-                viz.updateFrame(0); // Resetting to the first frame
-            });
+        // Adding each match as an option
+        Object.entries(matchesData).forEach(([matchId, matchData]) => {
+            const competition = matchData.competition;
+            const year = matchId.slice(-4);
+            const homeTeam = matchData.config.teams.home;
+            const awayTeam = matchData.config.teams.away;
+            const option = document.createElement('option');
+            option.value = matchId;
+            option.textContent = `${competition} (${year}) - ${homeTeam.name} ${homeTeam.score} - ${awayTeam.score} ${awayTeam.name}`;
+            matchSelect.appendChild(option);
         });
+
+        // Initially hiding loading indicator after matches are loaded
+        loadingDiv.style.display = 'none';
+
+        // Setting up match selection handler
+        matchSelect.addEventListener('change', async (event) => {
+            const selectedMatch = event.target.value;
+
+            if (!selectedMatch) {
+                return; // No match selected
+            }
+
+            // Showing loading indicator
+            loadingDiv.style.display = 'block';
+
+            try {
+                // Creating new visualization if not exists
+                if (!viz) {
+                    viz = new SoccerVisualization('#visualization');
+                }
+
+                // Initializing with selected match
+                await viz.initialize(selectedMatch);
+
+                // Setting up controls
+                const playPauseBtn = document.getElementById('playPause');
+                const resetBtn = document.getElementById('reset');
+
+                let isPlaying = true;
+
+                playPauseBtn.addEventListener('click', () => {
+                    if (isPlaying) {
+                        viz.stopAnimation();
+                        playPauseBtn.textContent = 'Play';
+                    } else {
+                        viz.startAnimation();
+                        playPauseBtn.textContent = 'Pause';
+                    }
+                    isPlaying = !isPlaying;
+                });
+
+                resetBtn.addEventListener('click', () => {
+                    viz.currentFrame = 0;
+                    viz.updateFrame(0);
+                });
+
+                // Hiding loading indicator
+                loadingDiv.style.display = 'none';
+            } catch (error) {
+                loadingDiv.style.display = 'none';
+                console.error('Error loading visualization:', error);
+            }
+        });
+
     } catch (error) {
         loadingDiv.style.display = 'none';
-        errorDiv.style.display = 'block';
-        errorDiv.textContent = 'Error loading visualization: ' + error.message;
+        console.log("Error loading match configurations:", error);
     }
 }
