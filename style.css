@@ -2,7 +2,6 @@ svg {
     display: block;
     font-family: sans-serif;
     font-size: 10px;
-    border: 2px dotted white;
 }
 
 * {
@@ -19,14 +18,14 @@ svg {
 body {
     position: absolute;
     width: 100%;
-    background: rgb(86, 82, 82);
-    color: #fff;
+    background: white;
+    color: #000;
 }
 
 #landing {
     width: calc(100% - 20px);
     height: 100px;
-    background: #333;
+    background: #f5f5f5;
     padding: 10px;
 }
 
@@ -41,8 +40,8 @@ body {
 #landing .menu form select {
     margin: 10px;
     padding: 5px;
-    background: #fff;
-    color: #333;
+    background: black;
+    color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -50,22 +49,21 @@ body {
 /* All sections */
 .section {
     position: relative;
-    width: calc(100% - 20px); /* -2*10px de padding */
+    width: calc(100% - 20px);
     padding: 10px;
-    /* background: #444; */
+    background: #f5f5f5;
     margin-bottom: 10px;
 }
 
 /* ------- Section 1 ------- */
 #gameViz {
-    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+    background: white;
 }
 
 /* ------- Section 2 ------- */
 #playersViz {
-    /*border: 1px solid rgb(163, 163, 163); /* to delete when sections are filled */
+    background: white;
 }
-
 
 #controls-part2 {
     display: flex;
@@ -82,7 +80,6 @@ body {
     padding: 20px;
 }
 
-
 #content-part2 li {
     padding: 10px;
     margin: 5px;
@@ -90,18 +87,19 @@ body {
 
 #list-left {
     position: relative;
-    border: 1px solid rgba(245, 245, 245, 0.554);
+    border: 1px solid #000;
     border-radius: 5px;
     max-height: 400px;
     flex: 1;
 }
 
 #list-left h3 {
-    border: 1px solid rgb(218, 214, 214);
+    border: 1px solid #000;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     text-align: center;
+    background: #f8f8f8;
 }
 
 #list-left .metrics {
@@ -109,6 +107,7 @@ body {
     padding: 7px;
     background: rgb(75, 75, 235);
     list-style: none;
+    color: white;
 }
 
 #list-left ul {
@@ -118,7 +117,7 @@ body {
 }
 
 #list-left ul li {
-    color: black;
+    color: #000;
     padding: 10px;
     cursor: pointer;
     background-color: #ddd;
@@ -140,18 +139,18 @@ body {
     align-items: center;
 }
 
-/* tooltip test */
+/* tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px dotted #333;
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: #555;
-    color: #fff;
+    background-color: #000;
+    color: white;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
@@ -163,7 +162,7 @@ body {
     opacity: 0;
     transition: opacity 0.3s;
 }
-  
+
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
@@ -172,7 +171,7 @@ body {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #555 transparent transparent transparent;
+    border-color: #333 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
@@ -181,32 +180,34 @@ body {
 }
 
 /* ------- Section 3 ------- */
-
-
+#teamViz {
+    background: white;
+}
 
 .navbar {
     display: flex;
     justify-content: space-around;
-    padding: 15px; /* Padding for aesthetic spacing */
-    background-color: #eee9e9;
-    color: white;
-    border: 1px solid grey;
+    padding: 15px;
+    background-color: #ddd;
+    color: #000;
+    border: 1px solid #aaa;
 }
 
 .navbar button {
-    background: #d2d8de;
+    background: #333;
     border: none;
     padding: 10px 20px;
-    color: rgb(28, 6, 60);
+    color: #fff;
     transition: background-color 0.3s;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 1.1em;	
-    font-weight: bold;	
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 .navbar button:hover, .navbar button.active {
     background-color: #0073e6;
+    color: white;
 }
 
 #match-stats {
@@ -215,7 +216,6 @@ body {
     flex-direction: column;
     padding: 20px;
     background: white;
-
 }
 
 .stat-row-team-names {
@@ -229,9 +229,8 @@ body {
 .team-name {
     height: 30px;
     font-size: 1.3em;
-    color: black;
+    color: #333;
     font-weight: bold;
-    
 }
 
 .stat-row {
@@ -254,7 +253,7 @@ body {
     flex-grow: 1;
     text-align: center;
     font-size: 1.1em;
-    color: black;
+    color: #333;
     font-weight: bold;
 }
 
@@ -262,18 +261,18 @@ body {
     width: 100px;
     text-align: center;
     font-size: 1.1em;
-    color: black;
+    color: #333;
     font-weight: bold;
 }
 
 .stat-value.home {
     text-align: right;
-    padding-right: 10px; 
+    padding-right: 10px;
 }
 
 .stat-value.away {
     text-align: left;
-    padding-left: 10px; 
+    padding-left: 10px;
 }
 
 .bar-container {
@@ -282,8 +281,8 @@ body {
     align-items: center;
     width: 75%;
     position: relative;
-    height: 10px; /* Increase the height for better visibility */
-    background-color: #9f9b9b; /* Optional: background to enhance visibility */
+    height: 10px;
+    background-color: #f0f0f0;
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -291,21 +290,21 @@ body {
 .stat-bar {
     height: 10px;
     position: absolute;
-    transition: width 0.5s ease-in-out; /* Add transition for animation */
+    transition: width 0.5s ease-in-out;
 }
 
 .stat-bar.home {
-    right: 50%; /* Starts from the center */
+    right: 50%;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    background-color: #b30000; /* Red color for home team */
+    background-color: #b30000;
     transform: translateX(-0.5%);
     border-color: #b30000;
 }
 
 .stat-bar.away {
-    left: 50%; /* Starts from the center */
-    background-color: #0000b3; /* Blue color for away team */
+    left: 50%;
+    background-color: #0000b3;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     transform: translateX(0.5%);
@@ -314,50 +313,23 @@ body {
 .stat-bar.hidden {
     display: none;
 }
+
 .origin-line {
     position: absolute;
-    width: 2px; /* Width of the vertical line */
-    height: 10px; /* Height equal to the bar chart height */
-    background-color: #fff; /* Color of the vertical line */
+    width: 2px;
+    height: 10px;
+    background-color: #666;
     left: 50%;
     transform: translateX(-50%);
 }
-/*-----line up section-----*/
-#lineup {
-    background: rgb(244, 239, 239); 
-    color: black;
-    display: none;
-    padding: 20px;
-}
-.lineup-container {
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-.team-section{
-    padding-top: 20px;
-    padding-left: 30px;
-    background-color: white;
-    color: black;
-}
-
-.position-section {
-    margin-bottom: 30px;
-    background-color: #f9f9f9 ;
-    padding: 5px;
-    border-radius: 5px;
-}
-
 
 /* ------- Footer ------- */
-
 footer {
-    width: calc(100% - 100px); /* -4*25px pour les padding et margin */
+    width: calc(100% - 100px);
     margin: 25px;
     padding: 25px;
     text-align: center;
-    border: 1px solid grey;
-    background: #333;
-    color: #fff;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    color: #333;
 }
